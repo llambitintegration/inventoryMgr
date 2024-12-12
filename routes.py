@@ -1,5 +1,12 @@
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from models import db, Component, Supplier, Location, InventoryTransaction
+import logging
+
+logger = logging.getLogger(__name__)
+
+inventory_bp = Blueprint('inventory', __name__)
+from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
+from models import db, Component, Supplier, Location, InventoryTransaction
 from utils.csv_import import process_csv_file
 import logging
 
@@ -89,6 +96,7 @@ def update_inventory():
 
 @inventory_bp.route('/api/inventory/search')
 def search_inventory():
+    """Search inventory components across multiple fields."""
     try:
         search_term = request.args.get('q', '').strip()
         logger.debug(f"Searching for term: {search_term}")
@@ -96,55 +104,45 @@ def search_inventory():
         if not search_term:
             return jsonify([])
 
-        # Count total components for debugging
-        total_count = Component.query.count()
-        logger.debug(f"Total components in database: {total_count}")
-
         # Build the base query with proper joins
-        query = db.session.query(Component, Supplier, Location)\
-            .join(Supplier, Component.supplier_id == Supplier.supplier_id)\
-            .join(Location, Component.location_id == Location.location_id)
+        query = Component.query\
+            .join(Supplier)\
+            .join(Location)\
+            .filter(
+                db.or_(
+                    Component.supplier_part_number.ilike(f'%{search_term}%'),
+                    Component.description.ilike(f'%{search_term}%'),
+                    Component.ecolab_part_number.ilike(f'%{search_term}%'),
+                    Supplier.supplier_name.ilike(f'%{search_term}%'),
+                    Location.location_code.ilike(f'%{search_term}%')
+                )
+            )\
+            .limit(10)
 
-        # Create search conditions
-        search_conditions = db.or_(
-            Component.supplier_part_number.ilike(f'%{search_term}%'),
-            Component.description.ilike(f'%{search_term}%'),
-            Component.ecolab_part_number.ilike(f'%{search_term}%'),
-            Supplier.supplier_name.ilike(f'%{search_term}%'),
-            Location.location_code.ilike(f'%{search_term}%')
-        )
-        
-        # Apply search conditions
-        query = query.filter(search_conditions)
-        
         # Log the SQL query for debugging
         sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
         logger.debug(f"Generated SQL: {sql}")
         
-        # Execute query and get results
-        results = query.limit(10).all()
-        logger.debug(f"Found {len(results)} matching components")
+        # Execute query
+        components = query.all()
+        logger.debug(f"Found {len(components)} matching components")
 
         # Format results
-        formatted_results = [{
-            'id': component.component_id,
-            'part_number': component.supplier_part_number,
-            'description': component.description,
-            'supplier': supplier.supplier_name,
-            'location': location.location_code,
-            'quantity': component.current_quantity,
-            'type': component.owner
-        } for component, supplier, location in results]
+        results = [{
+            'id': c.component_id,
+            'part_number': c.supplier_part_number,
+            'description': c.description,
+            'supplier': c.supplier.supplier_name,
+            'location': c.location.location_code,
+            'quantity': c.current_quantity,
+            'type': c.owner
+        } for c in components]
         
-        logger.debug(f"Returning formatted results: {formatted_results}")
-        return jsonify(formatted_results)
+        logger.debug(f"Returning formatted results: {results}")
+        return jsonify(results)
 
     except Exception as e:
         logger.error(f"Search error: {str(e)}", exc_info=True)
-        return jsonify({'error': str(e)}), 500
-
-    except Exception as e:
-        logger.error(f"Search error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 @inventory_bp.route('/reports')
 def reports():
