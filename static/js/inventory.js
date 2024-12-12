@@ -53,9 +53,22 @@ function initializeSearch() {
             console.log('Search button clicked:', searchText);
             performSearch(searchText);
         }
+        return false;
     });
     
-    // Handle enter key
+    // Handle form submission and enter key
+    const searchForm = searchInput.closest('form') || searchInput.parentElement;
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const searchText = searchInput.value.trim();
+        if (searchText) {
+            console.log('Form submitted / Enter pressed:', searchText);
+            performSearch(searchText);
+        }
+        return false;
+    });
+    
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -65,6 +78,7 @@ function initializeSearch() {
                 console.log('Enter key pressed:', searchText);
                 performSearch(searchText);
             }
+            return false;
         }
     });
     
@@ -103,13 +117,17 @@ function initializeSearch() {
 async function performSearch(searchText) {
     console.log('Performing search for:', searchText);
     const searchResults = document.querySelector('.search-results');
+    const searchInput = document.getElementById('searchInput');
     
-    if (!searchResults) {
-        console.error('Search results container not found');
+    if (!searchResults || !searchInput) {
+        console.error('Search elements not found:', {
+            results: !!searchResults,
+            input: !!searchInput
+        });
         return;
     }
     
-    // Clear previous timeout
+    // Clear previous timeout and ensure results container is visible
     if (searchTimeout) {
         clearTimeout(searchTimeout);
     }
@@ -120,12 +138,13 @@ async function performSearch(searchText) {
             <div class="spinner-border spinner-border-sm me-2" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            Searching...
+            Searching for "${searchText}"...
         </div>`;
     searchResults.classList.remove('d-none');
     
     // Log search request
     console.log('Making search request for:', searchText);
+    console.log('Search results container:', searchResults);
     
     try {
         console.log('Making fetch request to:', `/api/inventory/search?q=${encodeURIComponent(searchText)}`);
@@ -170,15 +189,25 @@ function updateSearchResults(data) {
         return;
     }
     
-    // Always show the results container when updating
+    // Force show the results container and ensure it's positioned correctly
+    searchResults.style.display = 'block';
     searchResults.classList.remove('d-none');
+    
+    // Ensure container is properly positioned
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        const inputRect = searchInput.getBoundingClientRect();
+        searchResults.style.top = `${inputRect.bottom}px`;
+        searchResults.style.width = `${inputRect.width}px`;
+    }
     
     if (!Array.isArray(data)) {
         console.error('Unexpected data format:', data);
         searchResults.innerHTML = `
             <div class="p-3 text-danger">
-                Invalid search results format
+                <i data-feather="alert-circle"></i> Invalid search results format
             </div>`;
+        feather.replace();
         return;
     }
     
