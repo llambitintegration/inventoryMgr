@@ -146,23 +146,50 @@ def reports():
         supplier_count = Supplier.query.count()
         
         # Get category value data with proper type conversion and null handling
-        category_values = db.session.query(
-            Component.owner.label('category'),
-            func.coalesce(func.sum(
-                Component.current_quantity * Component.unit_price
-            ), 0.0).label('value')
-        ).group_by(Component.owner).all()
-        
-        # Convert Decimal to float for JSON serialization with safe defaults
-        category_value_data = {
-            'labels': [str(category.category or 'Uncategorized') for category in category_values],
-            'datasets': [{
-                'data': [float(category.value or 0.0) for category in category_values],
-                'backgroundColor': ['#198754', '#0d6efd', '#dc3545', '#ffc107'][:len(category_values)],
-                'borderWidth': 1,
-                'borderColor': '#343a40'
-            }]
-        }
+        try:
+            category_values = db.session.query(
+                Component.owner.label('category'),
+                func.coalesce(func.sum(
+                    Component.current_quantity * Component.unit_price
+                ), 0.0).label('value')
+            ).group_by(Component.owner).all()
+            
+            # Ensure we have valid category values
+            if not category_values:
+                category_values = [('Uncategorized', 0.0)]
+                
+            # Convert Decimal to float for JSON serialization with safe defaults
+            labels = []
+            values = []
+            for row in category_values:
+                category = str(row[0] if row[0] is not None else 'Uncategorized')
+                value = float(row[1] if row[1] is not None else 0.0)
+                labels.append(category)
+                values.append(value)
+                
+            category_value_data = {
+                'labels': labels,
+                'datasets': [{
+                    'data': values,
+                    'backgroundColor': ['#198754', '#0d6efd', '#dc3545', '#ffc107'][:len(values)],
+                    'borderWidth': 1,
+                    'borderColor': '#343a40'
+                }]
+            }
+            
+            logger.debug(f"Processed category values: {category_value_data}")
+            
+        except Exception as e:
+            logger.error(f"Error processing category values: {str(e)}")
+            category_value_data = {
+                'labels': ['No Data'],
+                'datasets': [{
+                    'data': [0],
+                    'backgroundColor': ['#198754'],
+                    'borderWidth': 1,
+                    'borderColor': '#343a40'
+                }]
+            }
         
         # Log the data for debugging
         logger.debug(f"Category values query result: {category_values}")
