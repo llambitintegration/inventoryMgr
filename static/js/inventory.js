@@ -44,7 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     console.log('Searching for:', searchText); // Debug log
                     const response = await fetch(`/api/inventory/search?q=${encodeURIComponent(searchText)}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
                     const data = await response.json();
+                    console.log('Search response:', data); // Debug log
                     
                     if (data.error) {
                         console.error('Search error:', data.error);

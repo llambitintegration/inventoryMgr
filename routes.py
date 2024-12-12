@@ -99,7 +99,11 @@ def search_inventory():
     """Search inventory components across multiple fields."""
     try:
         search_term = request.args.get('q', '').strip()
-        logger.debug(f"Searching for term: {search_term}")
+        logger.debug(f"Search request received - Term: {search_term}")
+        
+        # Log request details
+        logger.debug(f"Request headers: {dict(request.headers)}")
+        logger.debug(f"Request args: {dict(request.args)}")
         
         if not search_term:
             return jsonify([])
