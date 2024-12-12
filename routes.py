@@ -98,23 +98,33 @@ def update_inventory():
 def search_inventory():
     """Search inventory components across multiple fields."""
     try:
+        # Enhanced debugging
+        logger.info("\n=== Search Request Started ===")
+        logger.info(f"Request Method: {request.method}")
+        logger.info(f"Request URL: {request.url}")
+        logger.info(f"Request Args: {request.args}")
+        logger.info(f"Request Headers: {dict(request.headers)}")
+        logger.info(f"Raw Query Param: {request.args.get('q', '')}")
+        
         search_term = request.args.get('q', '').strip()
-        logger.info(f"Search request received - Term: {search_term}")
+        logger.info(f"Processed search term: '{search_term}'")
         
         if not search_term:
             logger.info("Empty search term, returning empty results")
             return jsonify([])
 
-        # Verify database connection and log component count
+        # Database connection check
         try:
+            db.session.execute(db.select(db.text('1'))).scalar()
             component_count = Component.query.count()
             supplier_count = Supplier.query.count()
-            logger.info(f"Database status - Components: {component_count}, Suppliers: {supplier_count}")
-        except Exception as db_error:
+            location_count = Location.query.count()
+            logger.info(f"Database status - Components: {component_count}, Suppliers: {supplier_count}, Locations: {location_count}")
+        except SQLAlchemyError as db_error:
             logger.error(f"Database connection error: {str(db_error)}")
             return jsonify({'error': 'Database connection error'}), 500
         
-        # Build and execute the search query
+        # Build search query
         query = Component.query\
             .join(Supplier)\
             .join(Location)\
@@ -128,30 +138,45 @@ def search_inventory():
                 )
             )
         
-        # Log the SQL query for debugging
+        # Log the SQL query
         sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
-        logger.info(f"Generated SQL query: {sql}")
+        logger.info(f"Executing SQL query:\n{sql}")
         
-        # Execute query and get results
-        results = query.limit(10).all()
-        logger.info(f"Found {len(results)} matching components")
+        # Execute query with debugging
+        try:
+            results = query.limit(10).all()
+            logger.info(f"Query executed successfully, found {len(results)} results")
+        except Exception as query_error:
+            logger.error(f"Query execution error: {str(query_error)}")
+            return jsonify({'error': 'Error executing search query'}), 500
         
-        # Format results
-        formatted_results = [{
-            'id': c.component_id,
-            'part_number': c.supplier_part_number,
-            'description': c.description,
-            'supplier': c.supplier.supplier_name,
-            'location': c.location.location_code,
-            'quantity': c.current_quantity,
-            'type': c.owner
-        } for c in results]
-        
-        logger.info(f"Formatted {len(formatted_results)} results for response")
-        return jsonify(formatted_results)
+        # Format results with detailed logging
+        try:
+            formatted_results = []
+            for c in results:
+                result = {
+                    'id': c.component_id,
+                    'part_number': c.supplier_part_number,
+                    'description': c.description,
+                    'supplier': c.supplier.supplier_name,
+                    'location': c.location.location_code,
+                    'quantity': c.current_quantity,
+                    'type': c.owner
+                }
+                formatted_results.append(result)
+                logger.debug(f"Formatted result: {result}")
+            
+            logger.info(f"Successfully formatted {len(formatted_results)} results")
+            logger.info("=== Search Request Completed Successfully ===")
+            return jsonify(formatted_results)
+            
+        except Exception as format_error:
+            logger.error(f"Error formatting results: {str(format_error)}")
+            return jsonify({'error': 'Error formatting search results'}), 500
 
     except Exception as e:
-        logger.error(f"Search error: {str(e)}", exc_info=True)
+        logger.error("=== Search Request Failed ===")
+        logger.error(f"Unhandled error in search: {str(e)}", exc_info=True)
         return jsonify({'error': str(e)}), 500
 @inventory_bp.route('/reports')
 def reports():
