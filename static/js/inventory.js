@@ -42,16 +42,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 let highlightedText = '';
 
                 // Calculate match score and prepare highlighted text
+                const searchTerms = searchText.toLowerCase().split(/\s+/);
+                
                 for (let j = 0; j < cells.length - 1; j++) { // Exclude actions column
                     const cellText = cells[j].textContent.toLowerCase();
                     const cellContent = cells[j].textContent;
-                    if (cellText.includes(searchText.toLowerCase())) {
-                        matchScore += 2;
-                        if (j === 0) matchScore += 3; // Boost score for part number matches
-                        if (j === 1) matchScore += 2; // Boost score for description matches
-                        
-                        highlightedText = cellContent;
-                        break;
+                    
+                    for (const term of searchTerms) {
+                        if (cellText.includes(term)) {
+                            // Base score for any match
+                            matchScore += 1;
+                            
+                            // Boost scores based on column and match type
+                            if (j === 0 && cellText.startsWith(term)) matchScore += 5; // Part number starts with
+                            else if (j === 0) matchScore += 3; // Part number contains
+                            else if (j === 1) matchScore += 2; // Description
+                            else if (j === 2 && cellText.includes(term)) matchScore += 4; // Supplier name
+                            
+                            highlightedText = cellContent;
+                        }
                     }
                 }
 
@@ -59,8 +68,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     resultsHtml += `
                         <div class="search-result p-2 border-bottom cursor-pointer" 
                              onclick="showComponentDetails('${cells[0].textContent}')">
-                            <div class="fw-bold">${cells[0].textContent}</div>
-                            <small class="text-muted">${cells[1].textContent.substring(0, 100)}...</small>
+                            <div class="fw-bold">
+                                <i data-feather="box"></i> ${cells[0].textContent}
+                                <span class="badge bg-secondary ms-2">${cells[2].textContent}</span>
+                            </div>
+                            <div class="small">
+                                <span class="text-muted">${cells[1].textContent.substring(0, 100)}</span>
+                            </div>
+                            <div class="small mt-1">
+                                <span class="badge bg-${cells[5].querySelector('.badge').classList.contains('bg-danger') ? 'danger' : 'success'}">
+                                    Qty: ${cells[5].textContent.trim()}
+                                </span>
+                                <span class="badge bg-info ms-2">${cells[3].textContent}</span>
+                            </div>
                         </div>
                     `;
                     resultCount++;
