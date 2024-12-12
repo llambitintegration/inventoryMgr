@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
 
                     // Update search results dropdown
-                    if (results.length > 0) {
+                    if (data.length > 0) {
                         searchResults.innerHTML = resultsHtml + `
                             <div class="p-2 text-muted small">
                                 <kbd>↑</kbd> <kbd>↓</kbd> to navigate &nbsp; <kbd>Enter</kbd> to select &nbsp; <kbd>Esc</kbd> to dismiss
@@ -108,18 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, 300); // Debounce delay
 
-            // Update search results dropdown
-            if (resultCount > 0) {
-                searchResults.innerHTML = resultsHtml + `
-                    <div class="p-2 text-muted small">
-                        <kbd>↑</kbd> <kbd>↓</kbd> to navigate &nbsp; <kbd>Enter</kbd> to select &nbsp; <kbd>Esc</kbd> to dismiss
-                    </div>`;
-            } else {
-                searchResults.innerHTML = `
-                    <div class="p-3 text-muted">
-                        No matching components found
-                    </div>`;
-            }
+            // Search results are updated in the try-catch block above
         });
 
         // Handle keyboard navigation in search results
@@ -317,10 +306,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Component details modal functionality
-let componentModal;
-let currentComponentId;
+// Global variables for modal handling
+let quantityModal, componentModal;
+let currentComponentId = null;
 
 document.addEventListener('DOMContentLoaded', function() {
+    quantityModal = new bootstrap.Modal(document.getElementById('quantityModal'));
     componentModal = new bootstrap.Modal(document.getElementById('componentModal'));
 });
 
