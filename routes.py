@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from models import db, Component, Supplier, Location, InventoryTransaction
+from datetime import datetime, timedelta
 import logging
 
 logger = logging.getLogger(__name__)
@@ -211,7 +212,8 @@ def reports():
         }]
     }
     
-    # Get stock movement trend
+    # Get stock movement trend for the last 30 days
+    thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     stock_movement = db.session.query(
         db.func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
         db.func.sum(db.case(
@@ -219,7 +221,11 @@ def reports():
             (InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity),
             else_=0
         )).label('net_change')
-    ).group_by('date').order_by('date').limit(30).all()
+    ).filter(
+        InventoryTransaction.transaction_date >= thirty_days_ago
+    ).group_by(
+        'date'
+    ).order_by('date').all()
     
     stock_movement_data = {
         'labels': [date.strftime('%Y-%m-%d') for date, _ in stock_movement],
