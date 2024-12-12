@@ -1,24 +1,98 @@
 // Enhanced search and lookup functionality
-// Function to perform search
+function updateSearchResults(data) {
+    console.log('Updating search results with:', data);
+    const searchResults = document.querySelector('.search-results');
+    
+    if (!searchResults) {
+        console.error('Search results container not found');
+        return;
+    }
+
+    if (!Array.isArray(data)) {
+        console.error('Unexpected data format:', data);
+        searchResults.innerHTML = `
+            <div class="p-3 text-danger">
+                Error: Invalid search results format
+            </div>`;
+        return;
+    }
+
+    if (data.length === 0) {
+        searchResults.innerHTML = `
+            <div class="p-3 text-muted">
+                No matching items found
+            </div>`;
+        return;
+    }
+
+    let resultsHtml = '';
+    for (const item of data) {
+        resultsHtml += `
+            <div class="search-result p-2 border-bottom" onclick="showComponentDetails('${item.part_number}')">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="fw-bold">${item.part_number}</div>
+                        <div class="small text-muted">${item.description}</div>
+                    </div>
+                    <span class="badge bg-secondary">${item.supplier}</span>
+                </div>
+                <div class="small mt-1">
+                    <span class="badge bg-${item.quantity <= 0 ? 'danger' : 'success'}">
+                        Qty: ${item.quantity}
+                    </span>
+                    <span class="badge bg-info ms-2">${item.location}</span>
+                </div>
+            </div>`;
+    }
+    searchResults.innerHTML = resultsHtml;
+    searchResults.classList.remove('d-none');
+}
+
 async function performSearch(searchText) {
     console.log('Performing search for:', searchText);
+    const searchResults = document.querySelector('.search-results');
+    
+    if (!searchResults) {
+        console.error('Search results container not found');
+        return;
+    }
+
+    // Show loading state
+    searchResults.innerHTML = `
+        <div class="p-3 text-muted">
+            <div class="spinner-border spinner-border-sm me-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            Searching...
+        </div>`;
+    searchResults.classList.remove('d-none');
+
     try {
         const response = await fetch(`/api/inventory/search?q=${encodeURIComponent(searchText)}`);
         console.log('Search response status:', response.status);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         console.log('Search response data:', data);
-        
-        // Update the UI with search results
         updateSearchResults(data);
     } catch (error) {
         console.error('Search error:', error);
-        showError('Error performing search');
+        searchResults.innerHTML = `
+            <div class="p-3 text-danger">
+                Error performing search: ${error.message}
+            </div>`;
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Initializing search functionality');
     const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+    
+    // Create search results container
     const searchResults = document.createElement('div');
     searchResults.className = 'search-results position-absolute w-100 mt-1 bg-dark rounded shadow-lg d-none';
     searchInput.parentElement.style.position = 'relative';
@@ -26,38 +100,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let debounceTimeout;
     
-    if (searchInput) {
-        const searchButton = searchInput.parentElement.querySelector('button');
+    if (searchInput && searchForm) {
         console.log('Search elements initialized:', { 
             searchInput: !!searchInput, 
-            searchButton: !!searchButton 
+            searchForm: !!searchForm 
         });
 
-        // Add keyboard shortcut (Ctrl+K or Cmd+K) to focus search
+        // Handle form submission
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Search form submitted');
+            const searchText = searchInput.value.trim();
+            if (searchText) {
+                performSearch(searchText);
+            }
+        });
+
+        // Add keyboard shortcut (/) to focus search
         document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
                 e.preventDefault();
                 searchInput.focus();
             }
         });
-
-        // Handle search button click
-        if (searchButton) {
-            searchButton.addEventListener('click', function() {
-                console.log('Search button clicked');
-                performSearch(searchInput.value);
-            });
-        }
-
-        // Handle form submission
-        const searchForm = searchInput.closest('form');
-        if (searchForm) {
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                console.log('Search form submitted');
-                performSearch(searchInput.value);
-            });
-        }
 
         // Handle input changes
         searchInput.addEventListener('keyup', function(e) {

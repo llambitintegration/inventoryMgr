@@ -101,32 +101,24 @@ def search_inventory():
         search_term = request.args.get('q', '').strip()
         logger.info(f"Search request received - Term: {search_term}")
         
-        # Debug logging
-        logger.info(f"Request headers: {dict(request.headers)}")
-        logger.info(f"Request args: {dict(request.args)}")
-        
-        # Verify database connection
+        if not search_term:
+            logger.info("Empty search term, returning empty results")
+            return jsonify([])
+
+        # Verify database connection and log component count
         try:
             component_count = Component.query.count()
-            logger.info(f"Total components in database: {component_count}")
+            supplier_count = Supplier.query.count()
+            logger.info(f"Database status - Components: {component_count}, Suppliers: {supplier_count}")
         except Exception as db_error:
             logger.error(f"Database connection error: {str(db_error)}")
             return jsonify({'error': 'Database connection error'}), 500
         
-        if not search_term:
-            return jsonify([])
-
         # Build the base query with proper joins
         try:
+            # Build the main query with proper joins and logging
             logger.info(f"Building search query for term: {search_term}")
             
-            # First verify if suppliers exist
-            suppliers = Supplier.query.filter(
-                Supplier.supplier_name.ilike(f'%{search_term}%')
-            ).all()
-            logger.info(f"Found {len(suppliers)} matching suppliers")
-            
-            # Build the main query
             query = Component.query\
                 .join(Supplier)\
                 .join(Location)\
@@ -138,15 +130,32 @@ def search_inventory():
                         Supplier.supplier_name.ilike(f'%{search_term}%'),
                         Location.location_code.ilike(f'%{search_term}%')
                     )
-                )\
-                .limit(10)
-                
-            # Log the complete SQL query
+                )
+            
+            # Log the SQL query for debugging
             sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
             logger.info(f"Generated SQL query: {sql}")
             
+            # Execute query and get results
+            results = query.limit(10).all()
+            logger.info(f"Found {len(results)} matching components")
+            
+            # Format results
+            formatted_results = [{
+                'id': c.component_id,
+                'part_number': c.supplier_part_number,
+                'description': c.description,
+                'supplier': c.supplier.supplier_name,
+                'location': c.location.location_code,
+                'quantity': c.current_quantity,
+                'type': c.owner
+            } for c in results]
+            
+            logger.info(f"Formatted {len(formatted_results)} results for response")
+            return jsonify(formatted_results)
+            
         except Exception as query_error:
-            logger.error(f"Error building query: {str(query_error)}")
+            logger.error(f"Error executing search query: {str(query_error)}")
             raise
 
         # Log the SQL query for debugging
