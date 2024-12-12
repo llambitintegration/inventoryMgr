@@ -188,11 +188,57 @@ def reports():
     # Get transaction summary
     transactions = InventoryTransaction.query.order_by(
         InventoryTransaction.transaction_date.desc()
-    ).limit(10)
+    ).limit(10).all()
+    
+    # Calculate summary metrics
+    total_items = Component.query.count()
+    total_value = db.session.query(
+        db.func.sum(Component.current_quantity * Component.unit_price)
+    ).scalar() or 0
+    supplier_count = Supplier.query.count()
+    
+    # Get category value data
+    category_values = db.session.query(
+        Component.owner,
+        db.func.sum(Component.current_quantity * Component.unit_price).label('value')
+    ).group_by(Component.owner).all()
+    
+    category_value_data = {
+        'labels': [category[0] for category in category_values],
+        'datasets': [{
+            'data': [float(category[1] or 0) for category in category_values],
+            'backgroundColor': ['#198754', '#0d6efd']
+        }]
+    }
+    
+    # Get stock movement trend
+    stock_movement = db.session.query(
+        db.func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
+        db.func.sum(db.case(
+            (InventoryTransaction.transaction_type == 'IN', InventoryTransaction.quantity),
+            (InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity),
+            else_=0
+        )).label('net_change')
+    ).group_by('date').order_by('date').limit(30).all()
+    
+    stock_movement_data = {
+        'labels': [date.strftime('%Y-%m-%d') for date, _ in stock_movement],
+        'datasets': [{
+            'label': 'Net Stock Change',
+            'data': [int(change) for _, change in stock_movement],
+            'borderColor': '#0d6efd',
+            'tension': 0.1
+        }]
+    }
     
     return render_template('reports.html',
                          low_stock=low_stock,
-                         recent_transactions=transactions)
+                         recent_transactions=transactions,
+                         total_items=total_items,
+                         total_value=total_value,
+                         supplier_count=supplier_count,
+                         category_value_data=category_value_data,
+                         stock_movement_data=stock_movement_data)
 
 @inventory_bp.route('/api/inventory/component/<part_number>')
 def get_component_details(part_number):
