@@ -10,19 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize category value chart
     if (categoryValueCtx && typeof categoryValueData !== 'undefined') {
+        console.log('Category Value Data:', categoryValueData);
         new Chart(categoryValueCtx, {
             type: 'pie',
             data: {
                 labels: categoryValueData.labels,
                 datasets: [{
-                    data: categoryValueData.values,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(255, 206, 86, 0.8)',
-                        'rgba(75, 192, 192, 0.8)',
-                        'rgba(153, 102, 255, 0.8)'
-                    ]
+                    data: categoryValueData.datasets[0].data,
+                    backgroundColor: categoryValueData.datasets[0].backgroundColor
                 }]
             },
             options: {
