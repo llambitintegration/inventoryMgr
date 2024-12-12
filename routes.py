@@ -214,6 +214,15 @@ def reports():
     
     # Get stock movement trend for the last 30 days
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+    
+    # Create a series of dates
+    dates = []
+    current = thirty_days_ago
+    while current <= datetime.utcnow():
+        dates.append(current.date())
+        current += timedelta(days=1)
+
+    # Query transactions
     stock_movement = db.session.query(
         db.func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
         db.func.sum(db.case(
@@ -227,15 +236,27 @@ def reports():
         'date'
     ).order_by('date').all()
     
+    # Create a dictionary of date to net change
+    movement_dict = {movement.date.date(): movement.net_change or 0 for movement in stock_movement}
+    
+    # Fill in missing dates with zero
+    complete_movement = [(date, movement_dict.get(date, 0)) for date in dates]
+    
     stock_movement_data = {
-        'labels': [date.strftime('%Y-%m-%d') for date, _ in stock_movement],
+        'labels': [date.strftime('%Y-%m-%d') for date, _ in complete_movement],
         'datasets': [{
             'label': 'Net Stock Change',
-            'data': [int(change) for _, change in stock_movement],
+            'data': [int(change) for _, change in complete_movement],
             'borderColor': '#0d6efd',
-            'tension': 0.1
+            'backgroundColor': 'rgba(13, 110, 253, 0.1)',
+            'tension': 0.1,
+            'fill': True
         }]
     }
+    
+    # Add debug logging
+    logger.debug(f"Stock movement dates: {[date.strftime('%Y-%m-%d') for date, _ in complete_movement]}")
+    logger.debug(f"Stock movement values: {[int(change) for _, change in complete_movement]}")
     
     # Add debug logging
     logger.debug(f"Category Value Data: {category_value_data}")
