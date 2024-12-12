@@ -29,34 +29,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Show loading state
+            searchResults.innerHTML = `
+                <div class="p-3 text-muted">
+                    <div class="spinner-border spinner-border-sm me-2" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    Searching...
+                </div>
+            `;
+            
             // Fetch search results from server
             debounceTimeout = setTimeout(async () => {
                 try {
+                    console.log('Searching for:', searchText); // Debug log
                     const response = await fetch(`/api/inventory/search?q=${encodeURIComponent(searchText)}`);
-                    const results = await response.json();
+                    const data = await response.json();
                     
-                    if (results.error) {
-                        console.error('Search error:', results.error);
+                    if (data.error) {
+                        console.error('Search error:', data.error);
+                        searchResults.innerHTML = `
+                            <div class="p-3 text-danger">
+                                <i data-feather="alert-circle"></i> ${data.error}
+                            </div>`;
+                        feather.replace();
                         return;
                     }
 
                     let resultsHtml = '';
-                    for (const item of results) {
+                    for (const item of data) {
                         resultsHtml += `
                             <div class="search-result p-2 border-bottom cursor-pointer" 
                                  onclick="showComponentDetails('${item.part_number}')">
-                                <div class="fw-bold">
-                                    <i data-feather="box"></i> ${item.part_number}
-                                    <span class="badge bg-secondary ms-2">${item.supplier}</span>
-                                </div>
-                                <div class="small">
-                                    <span class="text-muted">${item.description}</span>
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="fw-bold">
+                                            <i data-feather="box"></i> ${item.part_number}
+                                        </div>
+                                        <div class="small text-muted">${item.description}</div>
+                                    </div>
+                                    <span class="badge bg-secondary">${item.supplier}</span>
                                 </div>
                                 <div class="small mt-1">
                                     <span class="badge bg-${item.quantity <= 0 ? 'danger' : 'success'}">
                                         Qty: ${item.quantity}
                                     </span>
                                     <span class="badge bg-info ms-2">${item.location}</span>
+                                    <span class="badge bg-secondary ms-2">${item.type}</span>
                                 </div>
                             </div>
                         `;
