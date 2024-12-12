@@ -99,29 +99,55 @@ def search_inventory():
     """Search inventory components across multiple fields."""
     try:
         search_term = request.args.get('q', '').strip()
-        logger.debug(f"Search request received - Term: {search_term}")
+        logger.info(f"Search request received - Term: {search_term}")
         
-        # Log request details
-        logger.debug(f"Request headers: {dict(request.headers)}")
-        logger.debug(f"Request args: {dict(request.args)}")
+        # Debug logging
+        logger.info(f"Request headers: {dict(request.headers)}")
+        logger.info(f"Request args: {dict(request.args)}")
+        
+        # Verify database connection
+        try:
+            component_count = Component.query.count()
+            logger.info(f"Total components in database: {component_count}")
+        except Exception as db_error:
+            logger.error(f"Database connection error: {str(db_error)}")
+            return jsonify({'error': 'Database connection error'}), 500
         
         if not search_term:
             return jsonify([])
 
         # Build the base query with proper joins
-        query = Component.query\
-            .join(Supplier)\
-            .join(Location)\
-            .filter(
-                db.or_(
-                    Component.supplier_part_number.ilike(f'%{search_term}%'),
-                    Component.description.ilike(f'%{search_term}%'),
-                    Component.ecolab_part_number.ilike(f'%{search_term}%'),
-                    Supplier.supplier_name.ilike(f'%{search_term}%'),
-                    Location.location_code.ilike(f'%{search_term}%')
-                )
-            )\
-            .limit(10)
+        try:
+            logger.info(f"Building search query for term: {search_term}")
+            
+            # First verify if suppliers exist
+            suppliers = Supplier.query.filter(
+                Supplier.supplier_name.ilike(f'%{search_term}%')
+            ).all()
+            logger.info(f"Found {len(suppliers)} matching suppliers")
+            
+            # Build the main query
+            query = Component.query\
+                .join(Supplier)\
+                .join(Location)\
+                .filter(
+                    db.or_(
+                        Component.supplier_part_number.ilike(f'%{search_term}%'),
+                        Component.description.ilike(f'%{search_term}%'),
+                        Component.ecolab_part_number.ilike(f'%{search_term}%'),
+                        Supplier.supplier_name.ilike(f'%{search_term}%'),
+                        Location.location_code.ilike(f'%{search_term}%')
+                    )
+                )\
+                .limit(10)
+                
+            # Log the complete SQL query
+            sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
+            logger.info(f"Generated SQL query: {sql}")
+            
+        except Exception as query_error:
+            logger.error(f"Error building query: {str(query_error)}")
+            raise
 
         # Log the SQL query for debugging
         sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))

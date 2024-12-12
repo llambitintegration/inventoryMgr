@@ -42,13 +42,24 @@ document.addEventListener('DOMContentLoaded', function() {
             // Fetch search results from server
             debounceTimeout = setTimeout(async () => {
                 try {
-                    console.log('Searching for:', searchText); // Debug log
-                    const response = await fetch(`/api/inventory/search?q=${encodeURIComponent(searchText)}`);
+                    console.log('Initiating search for:', searchText);
+                    const url = `/api/inventory/search?q=${encodeURIComponent(searchText)}`;
+                    console.log('Search URL:', url);
+                    
+                    const response = await fetch(url);
+                    console.log('Response status:', response.status);
+                    
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
+                    
                     const data = await response.json();
-                    console.log('Search response:', data); // Debug log
+                    console.log('Search response data:', data);
+                    
+                    if (!Array.isArray(data)) {
+                        console.error('Unexpected response format:', data);
+                        throw new Error('Invalid response format');
+                    }
                     
                     if (data.error) {
                         console.error('Search error:', data.error);
