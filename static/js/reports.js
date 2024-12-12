@@ -1,38 +1,49 @@
-// Initialize charts when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize date range picker with default values
+    // Initialize charts
+    const categoryValueCtx = document.getElementById('categoryValueChart')?.getContext('2d');
+    const stockMovementCtx = document.getElementById('stockMovementChart')?.getContext('2d');
     const startDateInput = document.getElementById('startDate');
     const endDateInput = document.getElementById('endDate');
     const updateButton = document.getElementById('updateDateRange');
+
+    let stockMovementChart = null;
     
-    // Set default date range (last 30 days)
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 30);
-    
-    startDateInput.value = startDate.toISOString().split('T')[0];
-    endDateInput.value = endDate.toISOString().split('T')[0];
-    
-    // Initialize Category Value Chart
-    const categoryValueCtx = document.getElementById('categoryValueChart');
+    // Initialize category value chart
     if (categoryValueCtx && typeof categoryValueData !== 'undefined') {
         new Chart(categoryValueCtx, {
-            type: 'doughnut',
-            data: categoryValueData,
+            type: 'pie',
+            data: {
+                labels: categoryValueData.labels,
+                datasets: [{
+                    data: categoryValueData.values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ]
+                }]
+            },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        position: 'bottom'
                     },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
                                 const value = context.raw;
-                                return `$${value.toLocaleString('en-US', {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                })}`;
+                                label += new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD'
+                                }).format(value);
+                                return label;
                             }
                         }
                     }
@@ -41,33 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Initialize Stock Movement Chart
-    let stockMovementChart = null;
-    const stockMovementCtx = document.getElementById('stockMovementChart');
-    
-    function initStockMovementChart(data) {
+    // Initialize stock movement chart
+    function initStockMovementChart(data = stockMovementData) {
+        if (!stockMovementCtx) return;
+
         if (stockMovementChart) {
             stockMovementChart.destroy();
         }
-        
+
         stockMovementChart = new Chart(stockMovementCtx, {
             type: 'line',
-            data: data || stockMovementData,
+            data: {
+                labels: data.labels,
+                datasets: data.datasets
+            },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        position: 'bottom'
                     },
                     tooltip: {
                         mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function(context) {
-                                const value = context.raw;
-                                return `Net Change: ${value > 0 ? '+' : ''}${value}`;
-                            }
-                        }
+                        intersect: false
                     }
                 },
                 scales: {
@@ -75,77 +82,93 @@ document.addEventListener('DOMContentLoaded', function() {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Net Change in Stock'
+                            text: 'Net Stock Change'
                         }
                     },
                     x: {
-                        display: true,
                         title: {
                             display: true,
                             text: 'Date'
-                        },
-                        ticks: {
-                            maxTicksLimit: 10
                         }
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'nearest'
                 }
             }
         });
     }
 
-    // Initialize Feather Icons for the export buttons
-    if (typeof feather !== 'undefined') {
-        feather.replace();
+    // Initialize stock movement chart with initial data
+    if (stockMovementCtx && typeof stockMovementData !== 'undefined') {
+        initStockMovementChart();
+    }
+
+    // Set default date range (last 30 days)
+    if (startDateInput && endDateInput) {
+        const end = new Date();
+        const start = new Date();
+        start.setDate(start.getDate() - 30);
+
+        startDateInput.value = start.toISOString().split('T')[0];
+        endDateInput.value = end.toISOString().split('T')[0];
+    }
+
+    // Handle date range updates
+    if (updateButton) {
+        updateButton.addEventListener('click', async function() {
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+
+            if (!startDate || !endDate) {
+                showAlert('Please select both start and end dates', 'warning');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/reports/stock-movement?start=${startDate}&end=${endDate}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch updated data');
+                }
+
+                const data = await response.json();
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                initStockMovementChart(data);
+                showAlert('Chart updated successfully', 'success');
+            } catch (error) {
+                console.error('Error updating chart:', error);
+                showAlert('Error updating chart: ' + error.message, 'danger');
+            }
+        });
     }
 });
 
-// Export table data to CSV
+// Helper function to show alerts
+function showAlert(message, type = 'success') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 m-3`;
+    alertDiv.style.zIndex = 1050;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    document.body.appendChild(alertDiv);
+    setTimeout(() => alertDiv.remove(), 3000);
+}
+
+// Export functionality
 function exportToCsv(tableType) {
-    const table = document.querySelector(`.card:has(button[onclick*="${tableType}"]) table`);
-    if (!table) return;
+    const table = document.querySelector(`.card:has(button[onclick="exportToCsv('${tableType}')"]) table`);
+    if (!table) {
+        showAlert('Table not found', 'error');
+        return;
+    }
 
     const rows = table.querySelectorAll('tr');
     const csvContent = [];
 
     // Get headers
     const headers = Array.from(rows[0].querySelectorAll('th'))
-    // Initialize the stock movement chart with initial data
-    if (stockMovementCtx && typeof stockMovementData !== 'undefined') {
-        initStockMovementChart();
-    }
-    
-    // Handle date range updates
-    if (updateButton) {
-        updateButton.addEventListener('click', async function() {
-            const startDate = startDateInput.value;
-            const endDate = endDateInput.value;
-            
-            try {
-                const response = await fetch(`/api/reports/stock-movement?start=${startDate}&end=${endDate}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch updated data');
-                }
-                
-                const data = await response.json();
-                initStockMovementChart(data);
-            } catch (error) {
-                console.error('Error updating chart:', error);
-                // Show error message to user
-                const alertDiv = document.createElement('div');
-                alertDiv.className = 'alert alert-danger alert-dismissible fade show';
-                alertDiv.innerHTML = `
-                    Error updating chart: ${error.message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                `;
-                document.querySelector('.card-body').prepend(alertDiv);
-            }
-        });
-    }
-});
         .map(header => `"${header.textContent.trim()}"`);
     csvContent.push(headers.join(','));
 
@@ -154,9 +177,7 @@ function exportToCsv(tableType) {
         const row = rows[i];
         const rowData = Array.from(row.querySelectorAll('td'))
             .map(cell => {
-                // Get text content, removing any extra spaces
                 let content = cell.textContent.trim();
-                // Handle cells with badge spans
                 const badge = cell.querySelector('.badge');
                 if (badge) {
                     content = badge.textContent.trim();
