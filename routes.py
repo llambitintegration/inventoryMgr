@@ -87,6 +87,36 @@ def update_inventory():
         logger.error(f"Error updating inventory: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+@inventory_bp.route('/api/inventory/search')
+def search_inventory():
+    try:
+        search_term = request.args.get('q', '').strip()
+        if not search_term:
+            return jsonify([])
+
+        # Search across multiple fields
+        components = Component.query.join(Supplier).join(Location).filter(
+            db.or_(
+                Component.supplier_part_number.ilike(f'%{search_term}%'),
+                Component.description.ilike(f'%{search_term}%'),
+                Supplier.supplier_name.ilike(f'%{search_term}%'),
+                Location.location_code.ilike(f'%{search_term}%')
+            )
+        ).limit(10).all()
+
+        return jsonify([{
+            'id': c.component_id,
+            'part_number': c.supplier_part_number,
+            'description': c.description,
+            'supplier': c.supplier.supplier_name,
+            'location': c.location.location_code,
+            'quantity': c.current_quantity,
+            'type': c.owner
+        } for c in components])
+
+    except Exception as e:
+        logger.error(f"Search error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 @inventory_bp.route('/reports')
 def reports():
     # Get low stock items

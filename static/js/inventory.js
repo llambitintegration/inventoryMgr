@@ -29,65 +29,61 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Filter table rows
-            const table = document.querySelector('table');
-            const rows = table.getElementsByTagName('tr');
-            let resultsHtml = '';
-            let resultCount = 0;
-
-            for (let i = 1; i < rows.length && resultCount < 5; i++) {
-                const row = rows[i];
-                const cells = row.getElementsByTagName('td');
-                let matchScore = 0;
-                let highlightedText = '';
-
-                // Calculate match score and prepare highlighted text
-                const searchTerms = searchText.toLowerCase().split(/\s+/);
-                
-                for (let j = 0; j < cells.length - 1; j++) { // Exclude actions column
-                    const cellText = cells[j].textContent.toLowerCase();
-                    const cellContent = cells[j].textContent;
+            // Fetch search results from server
+            debounceTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`/api/inventory/search?q=${encodeURIComponent(searchText)}`);
+                    const results = await response.json();
                     
-                    for (const term of searchTerms) {
-                        if (cellText.includes(term)) {
-                            // Base score for any match
-                            matchScore += 1;
-                            
-                            // Boost scores based on column and match type
-                            if (j === 0 && cellText.startsWith(term)) matchScore += 5; // Part number starts with
-                            else if (j === 0) matchScore += 3; // Part number contains
-                            else if (j === 1) matchScore += 2; // Description
-                            else if (j === 2 && cellText.includes(term)) matchScore += 4; // Supplier name
-                            
-                            highlightedText = cellContent;
-                        }
+                    if (results.error) {
+                        console.error('Search error:', results.error);
+                        return;
                     }
-                }
 
-                if (matchScore > 0) {
-                    resultsHtml += `
-                        <div class="search-result p-2 border-bottom cursor-pointer" 
-                             onclick="showComponentDetails('${cells[0].textContent}')">
-                            <div class="fw-bold">
-                                <i data-feather="box"></i> ${cells[0].textContent}
-                                <span class="badge bg-secondary ms-2">${cells[2].textContent}</span>
+                    let resultsHtml = '';
+                    for (const item of results) {
+                        resultsHtml += `
+                            <div class="search-result p-2 border-bottom cursor-pointer" 
+                                 onclick="showComponentDetails('${item.part_number}')">
+                                <div class="fw-bold">
+                                    <i data-feather="box"></i> ${item.part_number}
+                                    <span class="badge bg-secondary ms-2">${item.supplier}</span>
+                                </div>
+                                <div class="small">
+                                    <span class="text-muted">${item.description}</span>
+                                </div>
+                                <div class="small mt-1">
+                                    <span class="badge bg-${item.quantity <= 0 ? 'danger' : 'success'}">
+                                        Qty: ${item.quantity}
+                                    </span>
+                                    <span class="badge bg-info ms-2">${item.location}</span>
+                                </div>
                             </div>
-                            <div class="small">
-                                <span class="text-muted">${cells[1].textContent.substring(0, 100)}</span>
-                            </div>
-                            <div class="small mt-1">
-                                <span class="badge bg-${cells[5].querySelector('.badge').classList.contains('bg-danger') ? 'danger' : 'success'}">
-                                    Qty: ${cells[5].textContent.trim()}
-                                </span>
-                                <span class="badge bg-info ms-2">${cells[3].textContent}</span>
-                            </div>
-                        </div>
-                    `;
-                    resultCount++;
-                }
+                        `;
+                    }
 
-                row.style.display = matchScore > 0 ? '' : 'none';
-            }
+                    // Update search results dropdown
+                    if (results.length > 0) {
+                        searchResults.innerHTML = resultsHtml + `
+                            <div class="p-2 text-muted small">
+                                <kbd>↑</kbd> <kbd>↓</kbd> to navigate &nbsp; <kbd>Enter</kbd> to select &nbsp; <kbd>Esc</kbd> to dismiss
+                            </div>`;
+                        // Initialize Feather icons for new content
+                        feather.replace();
+                    } else {
+                        searchResults.innerHTML = `
+                            <div class="p-3 text-muted">
+                                No matching components found
+                            </div>`;
+                    }
+                } catch (error) {
+                    console.error('Error fetching search results:', error);
+                    searchResults.innerHTML = `
+                        <div class="p-3 text-danger">
+                            Error performing search
+                        </div>`;
+                }
+            }, 300); // Debounce delay
 
             // Update search results dropdown
             if (resultCount > 0) {
