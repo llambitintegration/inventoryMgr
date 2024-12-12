@@ -55,6 +55,16 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0">Stock Movement Trend</h5>
+                <div class="mt-2">
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="startDate">
+                        <span class="input-group-text">to</span>
+                        <input type="date" class="form-control" id="endDate">
+                        <button class="btn btn-outline-secondary" type="button" id="updateDateRange">
+                            <i data-feather="refresh-cw"></i> Update
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <canvas id="stockMovementChart"></canvas>

@@ -309,3 +309,59 @@ def get_component_details(part_number):
     except Exception as e:
         logger.error(f"Error fetching component details: {str(e)}")
         return jsonify({'error': str(e)}), 500
+
+
+@inventory_bp.route('/api/reports/stock-movement')
+def get_stock_movement():
+    try:
+        start_date = request.args.get('start')
+        end_date = request.args.get('end')
+        
+        if not start_date or not end_date:
+            return jsonify({'error': 'Start and end dates are required'}), 400
+            
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.strptime(end_date, '%Y-%m-%d') + timedelta(days=1)
+        
+        # Create a series of dates
+        dates = []
+        current = start_date
+        while current <= end_date:
+            dates.append(current.date())
+            current += timedelta(days=1)
+        
+        # Query transactions for the date range
+        stock_movement = db.session.query(
+            db.func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
+            db.func.sum(db.case(
+                (InventoryTransaction.transaction_type == 'IN', InventoryTransaction.quantity),
+                (InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity),
+                else_=0
+            )).label('net_change')
+        ).filter(
+            InventoryTransaction.transaction_date.between(start_date, end_date)
+        ).group_by(
+            'date'
+        ).order_by('date').all()
+        
+        # Create a dictionary of date to net change
+        movement_dict = {movement.date.date(): movement.net_change or 0 for movement in stock_movement}
+        
+        # Fill in missing dates with zero
+        complete_movement = [(date, movement_dict.get(date, 0)) for date in dates]
+        
+        return jsonify({
+            'labels': [date.strftime('%Y-%m-%d') for date, _ in complete_movement],
+            'datasets': [{
+                'label': 'Net Stock Change',
+                'data': [int(change) for _, change in complete_movement],
+                'borderColor': '#0d6efd',
+                'backgroundColor': 'rgba(13, 110, 253, 0.1)',
+                'tension': 0.1,
+                'fill': True
+            }]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching stock movement data: {str(e)}")
+        return jsonify({'error': str(e)}), 500

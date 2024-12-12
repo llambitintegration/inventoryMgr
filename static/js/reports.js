@@ -1,8 +1,21 @@
 // Initialize charts when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize date range picker with default values
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const updateButton = document.getElementById('updateDateRange');
+    
+    // Set default date range (last 30 days)
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 30);
+    
+    startDateInput.value = startDate.toISOString().split('T')[0];
+    endDateInput.value = endDate.toISOString().split('T')[0];
+    
     // Initialize Category Value Chart
     const categoryValueCtx = document.getElementById('categoryValueChart');
-    if (categoryValueCtx) {
+    if (categoryValueCtx && typeof categoryValueData !== 'undefined') {
         new Chart(categoryValueCtx, {
             type: 'doughnut',
             data: categoryValueData,
@@ -11,6 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 plugins: {
                     legend: {
                         position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `$${value.toLocaleString('en-US', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                })}`;
+                            }
+                        }
                     }
                 }
             }
@@ -18,11 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize Stock Movement Chart
+    let stockMovementChart = null;
     const stockMovementCtx = document.getElementById('stockMovementChart');
-    if (stockMovementCtx) {
-        new Chart(stockMovementCtx, {
+    
+    function initStockMovementChart(data) {
+        if (stockMovementChart) {
+            stockMovementChart.destroy();
+        }
+        
+        stockMovementChart = new Chart(stockMovementCtx, {
             type: 'line',
-            data: stockMovementData,
+            data: data || stockMovementData,
             options: {
                 responsive: true,
                 plugins: {
@@ -32,6 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     tooltip: {
                         mode: 'index',
                         intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `Net Change: ${value > 0 ? '+' : ''}${value}`;
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -77,6 +113,39 @@ function exportToCsv(tableType) {
 
     // Get headers
     const headers = Array.from(rows[0].querySelectorAll('th'))
+    // Initialize the stock movement chart with initial data
+    if (stockMovementCtx && typeof stockMovementData !== 'undefined') {
+        initStockMovementChart();
+    }
+    
+    // Handle date range updates
+    if (updateButton) {
+        updateButton.addEventListener('click', async function() {
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+            
+            try {
+                const response = await fetch(`/api/reports/stock-movement?start=${startDate}&end=${endDate}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch updated data');
+                }
+                
+                const data = await response.json();
+                initStockMovementChart(data);
+            } catch (error) {
+                console.error('Error updating chart:', error);
+                // Show error message to user
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Error updating chart: ${error.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.querySelector('.card-body').prepend(alertDiv);
+            }
+        });
+    }
+});
         .map(header => `"${header.textContent.trim()}"`);
     csvContent.push(headers.join(','));
 
