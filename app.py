@@ -5,8 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 
 # Configure logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
+# Enable debug logging for SQLAlchemy
+logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
 
 class Base(DeclarativeBase):
     pass

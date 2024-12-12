@@ -1,5 +1,23 @@
 // Enhanced search and lookup functionality
+// Function to perform search
+async function performSearch(searchText) {
+    console.log('Performing search for:', searchText);
+    try {
+        const response = await fetch(`/api/inventory/search?q=${encodeURIComponent(searchText)}`);
+        console.log('Search response status:', response.status);
+        const data = await response.json();
+        console.log('Search response data:', data);
+        
+        // Update the UI with search results
+        updateSearchResults(data);
+    } catch (error) {
+        console.error('Search error:', error);
+        showError('Error performing search');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing search functionality');
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.createElement('div');
     searchResults.className = 'search-results position-absolute w-100 mt-1 bg-dark rounded shadow-lg d-none';
@@ -9,6 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let debounceTimeout;
     
     if (searchInput) {
+        const searchButton = searchInput.parentElement.querySelector('button');
+        console.log('Search elements initialized:', { 
+            searchInput: !!searchInput, 
+            searchButton: !!searchButton 
+        });
+
         // Add keyboard shortcut (Ctrl+K or Cmd+K) to focus search
         document.addEventListener('keydown', function(e) {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -17,7 +41,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Handle search button click
+        if (searchButton) {
+            searchButton.addEventListener('click', function() {
+                console.log('Search button clicked');
+                performSearch(searchInput.value);
+            });
+        }
+
+        // Handle form submission
+        const searchForm = searchInput.closest('form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Search form submitted');
+                performSearch(searchInput.value);
+            });
+        }
+
+        // Handle input changes
         searchInput.addEventListener('keyup', function(e) {
+            console.log('Keyup event on search input:', e.key);
+            if (e.key === 'Enter') {
+                console.log('Enter key pressed, performing search');
+                performSearch(e.target.value);
+                return;
+            }
             clearTimeout(debounceTimeout);
             const searchText = this.value.trim();
             

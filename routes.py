@@ -94,7 +94,7 @@ def update_inventory():
         logger.error(f"Error updating inventory: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
-@inventory_bp.route('/api/inventory/search')
+@inventory_bp.route('/api/inventory/search', methods=['GET'])
 def search_inventory():
     """Search inventory components across multiple fields."""
     try:

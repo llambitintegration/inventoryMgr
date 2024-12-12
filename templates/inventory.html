@@ -3,12 +3,12 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2><i data-feather="package"></i> Inventory</h2>
-    <div class="input-group w-50">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search inventory...">
-        <button class="btn btn-outline-secondary" type="button">
+    <form class="input-group w-50" id="searchForm">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search inventory... (Press / to focus)">
+        <button class="btn btn-outline-secondary" type="submit" id="searchButton">
             <i data-feather="search"></i>
         </button>
-    </div>
+    </form>
 </div>
 
 <div class="table-responsive">
