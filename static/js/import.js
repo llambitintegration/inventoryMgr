@@ -15,7 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(statusCheckInterval);
             importButton.disabled = false;
             spinner.classList.add('d-none');
-            setTimeout(() => progressBar.classList.add('d-none'), 3000);
+            
+            if (status.status === 'completed') {
+                progressBarInner.classList.remove('progress-bar-animated');
+                progressBarInner.classList.add('bg-success');
+            } else {
+                progressBarInner.classList.remove('progress-bar-animated');
+                progressBarInner.classList.add('bg-danger');
+            }
+            
+            // Hide progress bar after showing final status
+            setTimeout(() => {
+                progressBar.classList.add('d-none');
+                progressBarInner.classList.remove('bg-success', 'bg-danger');
+                progressBarInner.classList.add('progress-bar-animated');
+                window.location.href = '/inventory';  // Redirect to inventory page after completion
+            }, 3000);
         }
     }
     

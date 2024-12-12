@@ -92,13 +92,35 @@ def process_csv_file(file):
             except Exception as e:
                 logger.error(f"Error processing row: {str(e)}")
                 error_count += 1
-                
+                current_import_status['status'] = 'error'
+                current_import_status['message'] = f"Error processing row {index+1}: {str(e)}"
+                break
+
         db.session.commit()
+        current_import_status.update({
+            'status': 'completed',
+            'message': f'Import completed. {success_count} records imported successfully, {error_count} errors.'
+        })
         return {"success": success_count, "errors": error_count}
         
     except Exception as e:
         logger.error(f"Error processing CSV file: {str(e)}")
+        current_import_status.update({
+            'status': 'error',
+            'message': f'Error: {str(e)}'
+        })
         raise
+    finally:
+        # Reset status after a delay to handle final status check
+        def reset_status():
+            global current_import_status
+            current_import_status = {
+                'total_rows': 0,
+                'current_row': 0,
+                'status': 'idle',
+                'message': ''
+            }
+        threading.Timer(5.0, reset_status).start()
 
 def clean_data(df):
     """Clean and standardize CSV data"""
