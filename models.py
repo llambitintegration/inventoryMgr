@@ -27,7 +27,7 @@ class Component(db.Model):
     supplier_id = db.Column(db.Integer, db.ForeignKey('suppliers.supplier_id'))
     owner = db.Column(component_type, nullable=False)
     supplier_part_number = db.Column(db.String(100))
-    ecolab_part_number = db.Column(db.String(8))
+    ecolab_part_number = db.Column(db.String(20))
     description = db.Column(db.Text)
     current_quantity = db.Column(db.Integer, nullable=False, default=0)
     minimum_quantity = db.Column(db.Integer, default=0)
