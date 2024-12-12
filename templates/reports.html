@@ -43,8 +43,11 @@
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Inventory Value by Category</h5>
+                <button class="btn btn-sm btn-outline-primary" onclick="exportChartData('category')">
+                    <i data-feather="download"></i> Export
+                </button>
             </div>
             <div class="card-body">
                 <canvas id="categoryValueChart"></canvas>
@@ -54,7 +57,12 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0">Stock Movement Trend</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Stock Movement Trend</h5>
+                    <button class="btn btn-sm btn-outline-primary" onclick="exportChartData('movement')">
+                        <i data-feather="download"></i> Export
+                    </button>
+                </div>
                 <div class="mt-2">
                     <div class="input-group">
                         <input type="date" class="form-control" id="startDate">

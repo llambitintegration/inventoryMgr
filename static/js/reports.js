@@ -152,6 +152,38 @@ function showAlert(message, type = 'success') {
 }
 
 // Export functionality
+function exportChartData(chartType) {
+    if (chartType === 'category') {
+        const data = categoryValueData;
+        const csvContent = ['Category,Value\n'];
+        
+        for (let i = 0; i < data.labels.length; i++) {
+            csvContent.push(`"${data.labels[i]}","${data.datasets[0].data[i]}"\n`);
+        }
+        
+        downloadCSV(csvContent.join(''), 'inventory-by-category.csv');
+    } else if (chartType === 'movement') {
+        const data = stockMovementChart.data;
+        const csvContent = ['Date,Net Change\n'];
+        
+        for (let i = 0; i < data.labels.length; i++) {
+            csvContent.push(`"${data.labels[i]}","${data.datasets[0].data[i]}"\n`);
+        }
+        
+        downloadCSV(csvContent.join(''), 'stock-movement.csv');
+    }
+}
+
+function downloadCSV(content, filename) {
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function exportToCsv(tableType) {
     const table = document.querySelector(`.card:has(button[onclick="exportToCsv('${tableType}')"]) table`);
     if (!table) {
