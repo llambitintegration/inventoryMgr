@@ -83,6 +83,74 @@
         </div>
     </div>
 </div>
+<!-- Component Details Modal -->
+<div class="modal fade" id="componentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Component Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="fw-bold">Part Number</label>
+                            <p id="modalPartNumber"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="fw-bold">Description</label>
+                            <p id="modalDescription"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="fw-bold">Supplier</label>
+                            <p id="modalSupplier"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="fw-bold">Current Quantity</label>
+                            <p id="modalQuantity"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="fw-bold">Location</label>
+                            <p id="modalLocation"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="fw-bold">Type</label>
+                            <p id="modalType"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h6>Recent Transactions</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalTransactions">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="adjustQuantity(currentComponentId)">
+                    Adjust Quantity
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}

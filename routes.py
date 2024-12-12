@@ -102,3 +102,42 @@ def reports():
     return render_template('reports.html',
                          low_stock=low_stock,
                          recent_transactions=transactions)
+
+@inventory_bp.route('/api/inventory/component/<part_number>')
+def get_component_details(part_number):
+    try:
+        component = Component.query.join(Supplier).join(Location).filter(
+            Component.supplier_part_number == part_number
+        ).first()
+        
+        if not component:
+            return jsonify({'error': 'Component not found'}), 404
+            
+        # Get recent transactions
+        transactions = InventoryTransaction.query.filter_by(
+            component_id=component.component_id
+        ).order_by(
+            InventoryTransaction.transaction_date.desc()
+        ).limit(5).all()
+        
+        return jsonify({
+            'component': {
+                'component_id': component.component_id,
+                'supplier_part_number': component.supplier_part_number,
+                'description': component.description,
+                'supplier_name': component.supplier.supplier_name,
+                'current_quantity': component.current_quantity,
+                'location_code': component.location.location_code,
+                'owner': component.owner
+            },
+            'transactions': [{
+                'transaction_date': t.transaction_date.isoformat(),
+                'transaction_type': t.transaction_type,
+                'quantity': t.quantity,
+                'notes': t.notes
+            } for t in transactions]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching component details: {str(e)}")
+        return jsonify({'error': str(e)}), 500
