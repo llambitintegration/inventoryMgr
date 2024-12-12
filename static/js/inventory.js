@@ -47,6 +47,7 @@ function initializeSearch() {
     // Handle search button click
     searchButton.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const searchText = searchInput.value.trim();
         if (searchText) {
             console.log('Search button clicked:', searchText);
@@ -58,6 +59,7 @@ function initializeSearch() {
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
+            e.stopPropagation();
             const searchText = this.value.trim();
             if (searchText) {
                 console.log('Enter key pressed:', searchText);
@@ -98,7 +100,7 @@ function initializeSearch() {
     });
 }
 
-async async function performSearch(searchText) {
+async function performSearch(searchText) {
     console.log('Performing search for:', searchText);
     const searchResults = document.querySelector('.search-results');
     
