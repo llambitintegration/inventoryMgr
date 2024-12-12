@@ -114,60 +114,30 @@ def search_inventory():
             logger.error(f"Database connection error: {str(db_error)}")
             return jsonify({'error': 'Database connection error'}), 500
         
-        # Build the base query with proper joins
-        try:
-            # Build the main query with proper joins and logging
-            logger.info(f"Building search query for term: {search_term}")
-            
-            query = Component.query\
-                .join(Supplier)\
-                .join(Location)\
-                .filter(
-                    db.or_(
-                        Component.supplier_part_number.ilike(f'%{search_term}%'),
-                        Component.description.ilike(f'%{search_term}%'),
-                        Component.ecolab_part_number.ilike(f'%{search_term}%'),
-                        Supplier.supplier_name.ilike(f'%{search_term}%'),
-                        Location.location_code.ilike(f'%{search_term}%')
-                    )
+        # Build and execute the search query
+        query = Component.query\
+            .join(Supplier)\
+            .join(Location)\
+            .filter(
+                db.or_(
+                    Component.supplier_part_number.ilike(f'%{search_term}%'),
+                    Component.description.ilike(f'%{search_term}%'),
+                    Component.ecolab_part_number.ilike(f'%{search_term}%'),
+                    Supplier.supplier_name.ilike(f'%{search_term}%'),
+                    Location.location_code.ilike(f'%{search_term}%')
                 )
-            
-            # Log the SQL query for debugging
-            sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
-            logger.info(f"Generated SQL query: {sql}")
-            
-            # Execute query and get results
-            results = query.limit(10).all()
-            logger.info(f"Found {len(results)} matching components")
-            
-            # Format results
-            formatted_results = [{
-                'id': c.component_id,
-                'part_number': c.supplier_part_number,
-                'description': c.description,
-                'supplier': c.supplier.supplier_name,
-                'location': c.location.location_code,
-                'quantity': c.current_quantity,
-                'type': c.owner
-            } for c in results]
-            
-            logger.info(f"Formatted {len(formatted_results)} results for response")
-            return jsonify(formatted_results)
-            
-        except Exception as query_error:
-            logger.error(f"Error executing search query: {str(query_error)}")
-            raise
-
+            )
+        
         # Log the SQL query for debugging
         sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
-        logger.debug(f"Generated SQL: {sql}")
+        logger.info(f"Generated SQL query: {sql}")
         
-        # Execute query
-        components = query.all()
-        logger.debug(f"Found {len(components)} matching components")
-
+        # Execute query and get results
+        results = query.limit(10).all()
+        logger.info(f"Found {len(results)} matching components")
+        
         # Format results
-        results = [{
+        formatted_results = [{
             'id': c.component_id,
             'part_number': c.supplier_part_number,
             'description': c.description,
@@ -175,10 +145,10 @@ def search_inventory():
             'location': c.location.location_code,
             'quantity': c.current_quantity,
             'type': c.owner
-        } for c in components]
+        } for c in results]
         
-        logger.debug(f"Returning formatted results: {results}")
-        return jsonify(results)
+        logger.info(f"Formatted {len(formatted_results)} results for response")
+        return jsonify(formatted_results)
 
     except Exception as e:
         logger.error(f"Search error: {str(e)}", exc_info=True)

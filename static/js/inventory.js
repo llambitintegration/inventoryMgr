@@ -28,10 +28,13 @@ function updateSearchResults(data) {
     let resultsHtml = '';
     for (const item of data) {
         resultsHtml += `
-            <div class="search-result p-2 border-bottom" onclick="showComponentDetails('${item.part_number}')">
+            <div class="search-result p-2 border-bottom cursor-pointer" 
+                 onclick="showComponentDetails('${item.part_number}')">
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <div class="fw-bold">${item.part_number}</div>
+                        <div class="fw-bold">
+                            <i data-feather="box"></i> ${item.part_number}
+                        </div>
                         <div class="small text-muted">${item.description}</div>
                     </div>
                     <span class="badge bg-secondary">${item.supplier}</span>
@@ -41,11 +44,14 @@ function updateSearchResults(data) {
                         Qty: ${item.quantity}
                     </span>
                     <span class="badge bg-info ms-2">${item.location}</span>
+                    <span class="badge bg-secondary ms-2">${item.type}</span>
                 </div>
             </div>`;
     }
+
     searchResults.innerHTML = resultsHtml;
     searchResults.classList.remove('d-none');
+    feather.replace();
 }
 
 async function performSearch(searchText) {
@@ -77,6 +83,17 @@ async function performSearch(searchText) {
         
         const data = await response.json();
         console.log('Search response data:', data);
+        
+        if (data.error) {
+            console.error('Search error:', data.error);
+            searchResults.innerHTML = `
+                <div class="p-3 text-danger">
+                    <i data-feather="alert-circle"></i> ${data.error}
+                </div>`;
+            feather.replace();
+            return;
+        }
+
         updateSearchResults(data);
     } catch (error) {
         console.error('Search error:', error);
@@ -87,206 +104,87 @@ async function performSearch(searchText) {
     }
 }
 
+// Initialize search functionality
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Initializing search functionality');
     const searchInput = document.getElementById('searchInput');
     const searchForm = document.getElementById('searchForm');
     
+    if (!searchInput || !searchForm) {
+        console.error('Search elements not found:', { 
+            searchInput: !!searchInput, 
+            searchForm: !!searchForm 
+        });
+        return;
+    }
+
     // Create search results container
     const searchResults = document.createElement('div');
     searchResults.className = 'search-results position-absolute w-100 mt-1 bg-dark rounded shadow-lg d-none';
     searchInput.parentElement.style.position = 'relative';
     searchInput.parentElement.appendChild(searchResults);
-    
-    let debounceTimeout;
-    
-    if (searchInput && searchForm) {
-        console.log('Search elements initialized:', { 
-            searchInput: !!searchInput, 
-            searchForm: !!searchForm 
-        });
 
-        // Handle form submission
-        searchForm.addEventListener('submit', function(e) {
+    // Handle form submission
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('Search form submitted');
+        const searchText = searchInput.value.trim();
+        if (searchText) {
+            performSearch(searchText);
+        }
+    });
+
+    // Add keyboard shortcut (/) to focus search
+    document.addEventListener('keydown', function(e) {
+        if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
             e.preventDefault();
-            console.log('Search form submitted');
-            const searchText = searchInput.value.trim();
-            if (searchText) {
-                performSearch(searchText);
-            }
-        });
+            searchInput.focus();
+        }
+    });
 
-        // Add keyboard shortcut (/) to focus search
-        document.addEventListener('keydown', function(e) {
-            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault();
-                searchInput.focus();
-            }
-        });
+    // Handle input changes with debouncing
+    let debounceTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(debounceTimeout);
+        const searchText = this.value.trim();
+        
+        if (searchText.length === 0) {
+            searchResults.classList.add('d-none');
+            return;
+        }
 
-        // Handle input changes
-        searchInput.addEventListener('keyup', function(e) {
-            console.log('Keyup event on search input:', e.key);
-            if (e.key === 'Enter') {
-                console.log('Enter key pressed, performing search');
-                performSearch(e.target.value);
-                return;
-            }
-            clearTimeout(debounceTimeout);
-            const searchText = this.value.trim();
-            
-            // Show/hide search results dropdown
-            if (searchText.length > 0) {
-                searchResults.classList.remove('d-none');
-            } else {
-                searchResults.classList.add('d-none');
-                return;
-            }
+        debounceTimeout = setTimeout(() => {
+            performSearch(searchText);
+        }, 300);
+    });
 
-            // Show loading state
-            searchResults.innerHTML = `
-                <div class="p-3 text-muted">
-                    <div class="spinner-border spinner-border-sm me-2" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    Searching...
-                </div>
-            `;
-            
-            // Fetch search results from server
-            debounceTimeout = setTimeout(async () => {
-                try {
-                    console.log('Initiating search for:', searchText);
-                    const url = `/api/inventory/search?q=${encodeURIComponent(searchText)}`;
-                    console.log('Search URL:', url);
-                    
-                    const response = await fetch(url);
-                    console.log('Response status:', response.status);
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    console.log('Search response data:', data);
-                    
-                    if (!Array.isArray(data)) {
-                        console.error('Unexpected response format:', data);
-                        throw new Error('Invalid response format');
-                    }
-                    
-                    if (data.error) {
-                        console.error('Search error:', data.error);
-                        searchResults.innerHTML = `
-                            <div class="p-3 text-danger">
-                                <i data-feather="alert-circle"></i> ${data.error}
-                            </div>`;
-                        feather.replace();
-                        return;
-                    }
+    // Handle click outside to close search results
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.classList.add('d-none');
+        }
+    });
 
-                    let resultsHtml = '';
-                    for (const item of data) {
-                        resultsHtml += `
-                            <div class="search-result p-2 border-bottom cursor-pointer" 
-                                 onclick="showComponentDetails('${item.part_number}')">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <div class="fw-bold">
-                                            <i data-feather="box"></i> ${item.part_number}
-                                        </div>
-                                        <div class="small text-muted">${item.description}</div>
-                                    </div>
-                                    <span class="badge bg-secondary">${item.supplier}</span>
-                                </div>
-                                <div class="small mt-1">
-                                    <span class="badge bg-${item.quantity <= 0 ? 'danger' : 'success'}">
-                                        Qty: ${item.quantity}
-                                    </span>
-                                    <span class="badge bg-info ms-2">${item.location}</span>
-                                    <span class="badge bg-secondary ms-2">${item.type}</span>
-                                </div>
-                            </div>
-                        `;
-                    }
-
-                    // Update search results dropdown
-                    if (data.length > 0) {
-                        searchResults.innerHTML = resultsHtml + `
-                            <div class="p-2 text-muted small">
-                                <kbd>↑</kbd> <kbd>↓</kbd> to navigate &nbsp; <kbd>Enter</kbd> to select &nbsp; <kbd>Esc</kbd> to dismiss
-                            </div>`;
-                        // Initialize Feather icons for new content
-                        feather.replace();
-                    } else {
-                        searchResults.innerHTML = `
-                            <div class="p-3 text-muted">
-                                No matching components found
-                            </div>`;
-                    }
-                } catch (error) {
-                    console.error('Error fetching search results:', error);
-                    searchResults.innerHTML = `
-                        <div class="p-3 text-danger">
-                            Error performing search
-                        </div>`;
-                }
-            }, 300); // Debounce delay
-
-            // Search results are updated in the try-catch block above
-        });
-
-        // Handle keyboard navigation in search results
-        searchInput.addEventListener('keydown', function(e) {
-            const results = searchResults.querySelectorAll('.search-result');
-            const current = searchResults.querySelector('.search-result.active');
-            
-            switch(e.key) {
-                case 'ArrowDown':
-                    e.preventDefault();
-                    if (!current) {
-                        results[0]?.classList.add('active');
-                    } else {
-                        const next = [...results].indexOf(current) + 1;
-                        if (next < results.length) {
-                            current.classList.remove('active');
-                            results[next].classList.add('active');
-                        }
-                    }
-                    break;
-                    
-                case 'ArrowUp':
-                    e.preventDefault();
-                    if (current) {
-                        const prev = [...results].indexOf(current) - 1;
-                        if (prev >= 0) {
-                            current.classList.remove('active');
-                            results[prev].classList.add('active');
-                        }
-                    }
-                    break;
-                    
-                case 'Enter':
-                    if (current) {
-                        e.preventDefault();
-                        current.click();
-                    }
-                    break;
-                    
-                case 'Escape':
-                    searchResults.classList.add('d-none');
-                    searchInput.blur();
-                    break;
-            }
-        });
-
-        // Hide search results when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.classList.add('d-none');
-            }
-        });
-    }
+    // Add styles for search results
+    const style = document.createElement('style');
+    style.textContent = `
+        .search-results {
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .search-result {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .search-result:hover {
+            background-color: var(--bs-gray-800);
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+    `;
+    document.head.appendChild(style);
 });
 
 // Quantity adjustment modal handling
@@ -486,21 +384,6 @@ async function showComponentDetails(partNumber) {
     }
 }
 
-// Add styles for search results
-const style = document.createElement('style');
-style.textContent = `
-    .search-result {
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
-    .search-result:hover, .search-result.active {
-        background-color: var(--bs-gray-800);
-    }
-    .cursor-pointer {
-        cursor: pointer;
-    }
-`;
-document.head.appendChild(style);
 
 // Quantity validation
 document.addEventListener('DOMContentLoaded', function() {
