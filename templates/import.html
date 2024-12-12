@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i data-feather="upload"></i> Import Inventory Data</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Select CSV File</label>
+                        <input type="file" class="form-control" name="file" accept=".csv">
+                    </div>
+                    <div class="mb-3">
+                        <h5>CSV Format Requirements:</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item">SUPPLIER (text)</li>
+                            <li class="list-group-item">Mechanical/Electrical (M/E)</li>
+                            <li class="list-group-item">SUPPLIER PART# (text)</li>
+                            <li class="list-group-item">8-DIGIT (text)</li>
+                            <li class="list-group-item">DESCRIPTION (text)</li>
+                            <li class="list-group-item">QTY (number)</li>
+                            <li class="list-group-item">NET PRICE (number)</li>
+                            <li class="list-group-item">LOCATION (text)</li>
+                        </ul>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i data-feather="upload"></i> Import Data
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

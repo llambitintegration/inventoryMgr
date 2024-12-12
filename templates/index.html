@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-dark rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Inventory Management System</h1>
+        <p class="col-md-8 fs-4">Manage your inventory, track transactions, and generate reports.</p>
+        <a href="{{ url_for('inventory.inventory') }}" class="btn btn-primary btn-lg">
+            <i data-feather="archive"></i> View Inventory
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i data-feather="upload"></i> Import Data
+                </h5>
+                <p class="card-text">Import inventory data from CSV files.</p>
+                <a href="{{ url_for('inventory.import_csv') }}" class="btn btn-outline-primary">Import CSV</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i data-feather="activity"></i> Transactions
+                </h5>
+                <p class="card-text">View and manage inventory transactions.</p>
+                <a href="{{ url_for('inventory.transactions') }}" class="btn btn-outline-primary">View Transactions</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i data-feather="bar-chart-2"></i> Reports
+                </h5>
+                <p class="card-text">Generate and view inventory reports.</p>
+                <a href="{{ url_for('inventory.reports') }}" class="btn btn-outline-primary">View Reports</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
