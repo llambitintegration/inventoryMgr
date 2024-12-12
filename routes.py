@@ -231,6 +231,10 @@ def reports():
         }]
     }
     
+    # Add debug logging
+    logger.debug(f"Category Value Data: {category_value_data}")
+    logger.debug(f"Stock Movement Data: {stock_movement_data}")
+    
     return render_template('reports.html',
                          low_stock=low_stock,
                          recent_transactions=transactions,

@@ -149,5 +149,10 @@
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Pass the data from Flask to JavaScript
+    const categoryValueData = {{ category_value_data | tojson | safe }};
+    const stockMovementData = {{ stock_movement_data | tojson | safe }};
+</script>
 <script src="{{ url_for('static', filename='js/reports.js') }}"></script>
 {% endblock %}
