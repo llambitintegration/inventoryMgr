@@ -1,0 +1,685 @@
+﻿SUPPLIER,Mechanical/Electrical,SUPPLIER PART#,8-DIGIT,DESCRIPTION,FROM PROJECT:,DATE,Cycle Count Date,QTY, NET PRICE , TOTAL ,LOCATION
+Hoffman,Electrical,CSD243010SS,,Metal Enclosure,,3/23/2021,,3,"$1,272 ","$3,817 ",FBR-2-SH-4-S-1
+AB,Electrical," 1769-OF4, Analog output",,,,4/17/2024,,1,$832 ,$832 ,R5-5-1
+,Electrical,,,ICBM Contral Panel,,3/25/2021,,1, Bad Part? , $-   ,FBR-4-SH-2-S-1
+IFM,Electrical,E18460,,YELLOW CABLE AWG 22,,4/28/2021,,20, Bad Part? , $-   ,FBR-4-SH-4S-1
+Goulds,Mechanical,SN;2021014501,,PUMP/POWER SUPPLY ( just pump no other parts),,4/28/2021,,1,, $-   ,FBR-4-SH-4S-1
+ALFA LAVAL,,610373  9634000312  246067  9634049938,,"TC SHORT WELD FERRULE, 90-WELD BEND, L31-4X3-316L-7",,4/28/2021,,1,$50 ,$50 ,FBR-4-SH-4S-1
+SMC,Electrical,PO 1438192,,8 STA VQZ332 W/FRL,,4/28/2021,,10,, $-   ,FBR-4-SH-4S-1
+Hoffman,Electrical,CP3024  213-RDL,,Concept Panel,,3/31/2021,,4,, $-   ,FBR-5-SH-2-S-2
+Steamgard,Mechanical,"1.5"" SG-EP-21N SYSTEM CS/SS 150PSIG",,PIPE AND VALVE,,5/4/2021,,1,, $-   ,FBR-5-SH-2-S-2
+,Electrical,18007100,,Contral Panel 20-00208,,3/25/2021,,3, Bad Part? , $-   ,FBR-5-SH-4-S-1
+Hoffman,Electrical,78351026159,,HOFF A24P24G PANEL,,4/9/2021,,2,, $-   ,FBR-6-F-S-1
+HOFFMAN,Electrical,23170,,A24P20 PANEL,,4/9/2021,,1,, $-   ,FBR-6-F-S-1
+Rosemount,Electrical,s/n;c20-22289505-003,,disconnect  84-265 VAC,,4/26/2021,,1,, $-   ,FBR-6-F-S-1
+AB,Electrical,1494U-J100-CR-NO-PC-S,,Disconnect Kits,,5/2/2021,,1,$862 ,$862 ,FBR-6-F-S-1
+HEYCO PRODUCTS,Electrical,M3200GBH,,"Liquid tight cord grip 1/2"" npt split",,6/16/2021,,200,, $-   ,FBR-6-F-S-1
+Burkert,Mechanical,98127342,,ON/OFF Valve,,7/27/2021,,1,, $-   ,FBR-6-F-S-1
+AB,Electrical,5069-OW16,,5000 RELAY OUTPUT MODULE,,8/20/2021,,13,$691 ,"$8,983 ",FBR-6-F-S-1
+ProMinent,Mechanical,Type; GMXA0715NPE2Q000UD01300EN,,Solenoid metering pump,,9/15/2021,,2,, $-   ,FBR-6-F-S-1
+HOFFMAN,Electrical,CSD243010SS,,ENCLOSURES,,5/4/2021,,3,, $-   ,FBR-8-SH-4-S-1
+AB,Electrical,2711P-B7C4A8,,"PANEL VIEW 6.5""",,4/18/2022,,1, OBSOLETE , $-   ,FLOOR
+Goulds,,5HP 3PH 380-460V,Maybe?,GEN 4 HYDROVAR,,4/18/2022,,1,, $-   ,FLOOR
+ANDERSON,Mechanical,AV-9000,,RECORDER/CONTROLLER,,7/20/2022,,1,"$3,000 ","$3,000 ",FLOOR
+,Mechanical,,,Low pressure cleaning equipment,,12/9/2021,,1, Bad Part? , $-   ,Pierce warehouse  Skid #103
+,Electrical,5400 BOX PC,,Versa View,,12/9/2021,,1, Bad Part? , $-   ,Pierce warehouse  Skid #103
+,Mechanical,"SVP-DEV/PROFI/LF/3XC/SEL/4404 E DN 3.0""",,,,12/9/2021,,1, Bad Part? , $-   ,Pierce warehouse  Skid #103
+,Mechanical,Steam Valve,,Steam Valve(no cables),,12/9/2021,,1, Bad Part? , $-   ,Pierce warehouse  Skid #103
+Hoffman,Electrical,Enclosure w/panel,,Enclosurew/panel 20x16,,12/9/2021,,1, Bad Part? , $-   ,Pierce warehouse  Skid #103
+AB,Electrical,N280446G0S1,,Air Condicioner,,12/9/2021,,1, Bad Part? , $-   ,Pierce warehouse  Skid #103
+Ecolab,Mechanical,Boosted Pressure System,,Boosted Pressure System,,12/6/2021,,1,, $-   ,Pierce warehouse Skid # 101
+Hoffman,Electrical,CSD243010 SS,,Enclosure ,,12/6/2021,,1,, $-   ,Pierce warehouse Skid # 102
+,Electrical,VFD,,VFD,,12/6/2021,,1, Bad Part? , $-   ,Pierce warehouse Skid # 102
+Goulds,,VP15,,Hydropro-Water System Tank,,12/6/2021,,6,, $-   ,Pierce warehouse Skid # 102
+Burkert,Mechanical,PVC  Mixers,,PVC Mixers,,12/6/2021,,3,, $-   ,Pierce warehouse Skid # 102
+Goulds,,VP6,,Hydropro-Water System Tank,,12/6/2021,,1,, $-   ,Pierce warehouse Skid # 102
+,Electrical,5400 Box PC,,Versa View,,12/6/2021,,2, Bad Part? , $-   ,Pierce warehouse Skid # 102
+Goulds,,10SV6GG4F60  5HP,Maybe?,PUMP,,12/9/2021,,1,, $-   ,Pierce warehouse Skid # 108
+Hoffman,Electrical,  WS 483616 SS,,ENCLOSURE SS,,12/9/2021,,1,, $-   ,Pierce warehouse Skid #104
+Hoffman,Electrical,A48P36,,BACK PANELS,,12/9/2021,,1,, $-   ,Pierce warehouse Skid #104
+GRUNDFOS,Mechanical,N-FG-A-V-HQQV  7.5 HP 3X440-480V 60HZ,,Grundfos pump,,12/9/2021,,1,, $-   ,Pierce warehouse Skid #105
+Goulds,,335V 20GJ4F60,,Pump,,12/9/2021,,1,, $-   ,Pierce warehouse Skid #106
+,Mechanical,DH0102PHA  10HP,,PUMP,,12/9/2021,,2, Bad Part? , $-   ,Pierce warehouse Skid #107
+Hoffman,Electrical,ENCLOSURE,,ENCLOSURE 48X36 SS,,12/9/2021,,2,, $-   ,Pierce warehouse Skid #109
+Ecolab,Mechanical,AJ Box,,AJ Box,,12/9/2021,,7,, $-   ,Pierce warehouse Skid #109
+Ecolab,Mechanical,AJ Box w/90deg elbow,,AJ Box w/90 deg elbow,,12/9/2021,,3,, $-   ,Pierce warehouse Skid #109
+AB,Electrical,1585J-M8CBJM-1,,Ethernet Media,,3/16/2021,,5,25.13,$126 ,R1-1-1
+AB,Electrical,1734-OB8,,,,10/18/2023,,8,$606 ,"$4,850 ",R6-4-1
+AB,Electrical,1783-US5T SER B,,Ethernet Unmanaged Switch,,3/16/2021,,3,137,$411 ,R1-1-3
+FESTO,Electrical,VTUS-25-SB2F8-16BH-N12-G-N14T-8VS+H,,"Manifold assembly ,air bank",,10/18/2023,,2,, $-   ,R7-1-2
+AB,Electrical,1585J-M8PBJM-0M2 (Bad Part #),,Ethernet Media,,3/16/2021,,6, Bad Part? , $-   ,R1-1-3
+AB,Electrical,1694-PF-1244,,Power Feed,,3/16/2021,,5,18,$90 ,R1-2-1
+AB,Electrical,700-HLT1U24,,HL TYPE TERMINAL BLOCK RELAY ,,1/30/2024,,28,26,$728 ,R6-4-1
+AB,Electrical,1494U-LA36,,Lug Connectors,,3/16/2021,,12,3.34,$40 ,R1-2-2
+AB,Electrical,2080-LC50-24QWB,,,,4/17/2024,,1,$524 ,$524 ,R5-5-1
+SMC,Electrical,AR40-N04-Z-B-X48,,Epoxy Coated Regulator,,3/16/2021,,1,, $-   ,R1-2-2
+AB,Electrical,1401-N42,,Fuse Clip,,3/16/2021,,1,43.15,$43 ,R1-2-3
+AB,Electrical,1494U-NO,,Auxiliary Contact,,3/16/2021,,1,33.48,$33 ,R1-2-3
+Camozzi,Mechanical,M008-R00TF,,Regulator,,3/16/2021,,4,, $-   ,R1-2-3
+AB,Electrical,800T-XA1,,Contact Shallow Block,,3/16/2021,,13,$21 ,$273 ,R1-2-3
+Weidmuller,Electrical,383560000,,Terminal Block,,3/16/2021,,43,, $-   ,R1-2-4
+Weidmuller,Electrical,189630000,,End Barriers,,3/16/2021,,43,, $-   ,R1-2-4
+Weidmuller,Electrical,1896480000,,End Barriers,,3/16/2021,,48,, $-   ,R1-2-4
+AB,Electrical,1783-US5T SER B,,,,12/6/2023,,1,$138.66 ,$139 ,R3-5-2
+AB,Electrical,1489-M1C030 SER. D,,Circuit Breaker,,3/16/2021,,1,42,$42 ,R1-2-5
+AB,Electrical,1492-EBPD3,,End Barriers,,3/17/2021,,13,0.89,$12 ,R1-3-1
+Phoenix Contact,Electrical,78037399962,,Terminal Block,,3/17/2021,,5,, $-   ,R1-3-1
+AB,Electrical,1489-AMCL306,,MCB Bus Bar Accessory 3 Phase,,3/17/2021,,10,94,$940 ,R1-3-1
+AB,Electrical,1401-N45,,Fuse Clip,,3/17/2021,,1,$220 ,$220 ,R1-3-2
+AB,Electrical,1494U-LC200,,Lug Connectors,,3/17/2021,,2,$85 ,$170 ,R1-3-2
+Champion,Mechanical,CHA0508376,,Nozzle 1/8m-8006 BR NCKL,,3/17/2021,,40,, $-   ,R1-3-2
+Champion,Mechanical,CHA113555,,Plug E Washarm Cleanout,,3/17/2021,,12,$30 ,$360 ,R1-3-2
+Phoenix Contact,Electrical,3030213,,FBS 10-5 Plug in bridge (red) Jumpers,,3/18/2021,,10,, $-   ,R1-3-3
+Phoenix Contact,Electrical,3036916,,FBS 10-5 BU Plug in bridge (blue),,3/18/2021,,10,, $-   ,R1-3-3
+WOLSELEY,Mechanical,?,,1/2-13x1-1/2 Hex Hd Cap Screw,,3/17/2021,,20,, $-   ,R1-3-3
+Hotron,Electrical,E246588,,AWM style 20276 VW-1 30V Cable,,3/18/2021,,6,, $-   ,R1-3-3
+Phoenix Contact,Electrical,3030174,,FBS 3-5 Plug in bridge,,3/18/2021,,10,, $-   ,R1-3-4
+Phoenix Contact,Electrical,3030161,,FBS 2-5 Plug in bridge (red),,3/18/2021,,10,, $-   ,R1-3-4
+Phoenix Contact,Electrical,3036877,,FBS 2-5 BU Plug in bridge (blue),,3/18/2021,,10,, $-   ,R1-3-4
+AB,Electrical,1492-CJP2-10-RE,,Red jumper,,3/18/2021,,14,$5 ,$69 ,R1-3-4
+AB,Electrical,1492-CJP2-10-RE,,Center jumpers,,3/23/2021,,3,$3 ,$9 ,R1-3-4
+AB,Electrical,1492-CJP2-10-B,,Jumpers,,4/7/2021,,3,$3 ,$9 ,R1-3-4
+HIS,Electrical,,,ADAP-DPM-DVIIF,,3/31/2021,,2,, $-   ,R1-3-4
+BUSSMANN,Electrical,BUSS-LP-CC-7-1/2L,,,,9/6/2022,,3, Bad Part? , $-   ,R1-3-5
+,Mechanical,GSP46LF,,"3/4""X4"" NPL T.O.E. 3/4SS S40 316L A312",,4/6/2021,,2, Bad Part? , $-   ,R1-3-5
+AB,Electrical,1492-M3X5,,Markers,,3/23/2021,,3,$6 ,$18 ,R1-4-1
+ALFA LAVAL,,213598,,"adapter,  21MP-1X1-316L-7",,10/17/2023,,1,$28 ,$28 ,R3-5-1
+SMC,Electrical,KQG2E07-00,,CONNECTOR /Bulkhead union,,4/19/2021,,4,, $-   ,R1-4-2
+SMC,Electrical,KQ2P-09,,PLUGS,,4/28/2021,,30,, $-   ,R1-4-2
+SMC,Electrical,VVQ1000W-27-14,,Rod,,5/3/2021,,2,, $-   ,R1-4-2
+SMC,Electrical,Y40-A-T4,,SPACER ASSEMBLY,,5/4/2021,,2,, $-   ,R1-4-2
+SMC,Electrical,528853249,,GAUGE PRESSURE,,5/4/2021,,1,, $-   ,R1-4-2
+SMC,Electrical,98133728,,TUBE FTG &MUFFLER,,5/4/2021,,1,, $-   ,R1-4-2
+SMC,Electrical,SY3100-5U1,,SALENOID VALVES,,5/6/2021,,6,, $-   ,R1-4-2
+,Mechanical,,,Push in conectors/union,,6/24/2021,,4, Bad Part? , $-   ,R1-4-2
+SMC,Electrical,SY30M-3-1A-N9,,,,5/19/2021,,2,, $-   ,R1-4-3
+SMC,Electrical,SY30M-1-1A-N9,,,,5/19/2021,,2,, $-   ,R1-4-3
+SMC,Electrical,SY30M-2-1SA-N7,,,,5/19/2021,,6,, $-   ,R1-4-3
+SMC,Electrical,VVQ1000W-27-12,,SMALL SCREWS,,5/25/2021,,30,, $-   ,R1-4-4
+SMC,Electrical,VVQ1000W-27-14,,RODS,,5/25/2021,,4,, $-   ,R1-4-4
+SMC,Electrical,VVQ1000W-27-?,,LONG RODS,,5/25/2021,,21,, $-   ,R1-4-4
+SMC,Electrical,VVQ1000W-27-?,,SCREWS + MISC,,5/25/2021,,40,, $-   ,R1-4-4
+SMC,Electrical,VVQ1000W-27-12,,RODS,,5/25/2021,,6,, $-   ,R1-4-4
+SMC,Electrical,SY100-30-4A-6,,BLK/RED-WIRES,,5/25/2021,,2,, $-   ,R1-4-4
+SMC,Electrical,,,"1/4""  PLUGS",,5/25/2021,,12,, $-   ,R1-4-4
+AB,Electrical,440R-EM4R2,,,,10/18/2023,,1,$225 ,$225 ,R6-3-3
+,Electrical,089G 725LAA 2G,,VGA-cable,,5/25/2021,,1, Bad Part? , $-   ,R1-4-5
+IFM,Electrical,US0041,,"Cuplings 3/4""",,5/25/2021,,2,$46 ,$93 ,R1-4-5
+SMC,Electrical,KQ2L09-35AS,,FITTING MALE ELBOW 1/4 X 5/16,,5/11/2021,,23,, $-   ,R1-5-1
+AB,Electrical,194R-S1,,Rod,,5/19/2021,,6,$12 ,$72 ,R1-5-2
+,Electrical,,,DIN RAILS 1FT,,5/25/2021,,4, Bad Part? , $-   ,R1-5-3
+Roxtec,Electrical,RG M63/9 AISI316L,,ROXTEC RG M63,,5/25/2021,,1,, $-   ,R1-5-4
+McMaster,,,,3/8 push connector,,5/12/2021,,4,, $-   ,R1-5-5
+McMaster,,,,1/2 push connectors,,9/15/2022,,2,, $-   ,R1-5-5
+AB,Electrical,700-HN125,,RELAY BASE,,9/7/2022,,1,$6 ,$6 ,R1-6-1
+AB,Electrical,700HA 32224 ,,RELAY,,9/7/2022,,1, Bad Part? , $-   ,R1-6-1
+IFM,Electrical,E33209,86189124,"ADAPT IFM-CLAMP 2""",,9/7/2022,,2,$62 ,$123 ,R1-6-1
+AB,Electrical,1492 WGU,,TERM BLOCKS,,9/7/2022,,7,Bad Part?, $-   ,R1-6-2
+AB,Electrical,1492-W4,,TERM BLOCKS,,9/7/2022,,50,$2 ,$108 ,R1-6-2
+AB,Electrical,1492-FB1J60,,FUSE HOLDER,,9/7/2022,,1,$22 ,$22 ,R1-6-2
+McMaster,,BFA3005TES,,"1/2""BF ST D FLG TXT PPL EPDM Wall Pipe Fitting",,9/7/2022,,1,, $-   ,R1-6-3
+McMASTER,,,,"3/8"" PUSH CONNECTOR",,9/7/2022,,3,, $-   ,R1-6-3
+McMASTER,,,,"1/4"" PUSH CONNECTOR",,9/7/2022,,4,, $-   ,R1-6-3
+,Electrical,X001SKBL2X,,RJ45 ETHERNET CONNECTOR BREAKOUT BOARD,,5/26/2021,,1, Bad Part? , $-   ,R1-6-4
+EATON,,E22NS36,,LEGEND PLATE,,6/15/2021,,2, Bad Part? , $-   ,R1-6-4
+IFM,Electrical,E33209,86189124,"ADAPT IFM-CLAMP 2"" 3A",,9/13/2022,,3,$62 ,$185 ,R1-6-4
+HAYWARD,Mechanical,BFA3005TES,,"1/2"" BF ST D FLG TXT PPL EPDM",,5/26/2021,,1,, $-   ,R1-6-5
+SMC,Electrical,KQ2H11-37NS,,"3/8"" PUSH FITTING (ONE SIDE THREADED)",,5/26/2021,,9,, $-   ,R1-6-5
+Weidmuller,Electrical,1896120000,,Terminal Block,,3/16/2021,,82,, $-   ,R2-1-1
+Weidmuller,Electrical,1896110000,,Terminal Block,,3/16/2021,,57,, $-   ,R2-1-1
+AB,Electrical,1492-PSG2-4,,Terminal Block,,3/16/2021,,100,0.99,$99 ,R2-1-1
+HEYCO PRODUCTS,Electrical,M3234GBH,,Liquid Tight Cord Grip,,3/16/2021,,33,, $-   ,R2-1-1
+AB,Electrical,1492-P2Q,,Terminal Blocks,,3/17/2021,,178,2.09,$372 ,R2-1-2
+AB,Electrical,1492-EBP2Q,,End Barriers,,3/17/2021,,47,0.56,$26 ,R2-1-2
+AB,Electrical,700-HN205,,11 Pin Socket,,3/17/2021,,4,9.38,$38 ,R2-1-2
+Turck,Electrical,RKM 36-2-AC PWR MALE,,Power Cord,,3/17/2021,,1,, $-   ,R2-1-2
+AB,Electrical,1769-ECR,,Compact I/O Right End Cap/Terminator,,3/16/2021,,6,37.56,$225 ,R2-1-3
+AB,Electrical,1492-PD3,,Terminal Blocks,,3/17/2021,,153,Bad Part?, $-   ,R2-1-3
+WOLSELEY,Mechanical,WWSSCV14,,SS Thrd Inline Chk Vlv,,3/17/2021,,6,, $-   ,R2-2-1
+WOLSELEY,Mechanical,?,,"1"" TC-316 Stainless Steel Tee Pipe Fitting",,3/17/2021,,5,, $-   ,R2-2-1
+HUBBELL,Electrical,PS0759NGY,,CONDUIT FITTINGS SWIVEL,,5/10/2021,,6,, $-   ,R2-2-2
+AB,Electrical,800H-QR24R,,Indicating Light,,3/30/2021,,1,$60 ,$60 ,R2-2-2
+AB,Electrical,800H-QRB24R,,Puch Button ,,3/30/2021,,1,$60 ,$60 ,R2-2-2
+AB,Electrical,1585J-M8CBJM-1,,ETHERNET CABLE,,4/20/2021,,1,$22 ,$22 ,R2-2-3
+AB,Electrical,1606-XLE120E-2,,Power Supply,,4/20/2021,,1,$175 ,$175 ,R2-2-3
+IFM,Electrical,EVT001,,,,9/15/2022,,1,$16 ,$16 ,R2-2-3
+IFM,Electrical,EVF445,,CYJV/7 CABLE,,4/20/2021,,1,$32 ,$32 ,R2-2-3
+IFM,Electrical,EVF048,,CYJV/7 CABLE,,4/20/2021,,2,$30 ,$60 ,R2-2-3
+IFM,Electrical,EVF050,,CYJV/7 CABLE,,4/20/2021,,1,$33 ,$33 ,R2-2-3
+IFM,Electrical,EVT001,,ADOGH040VAS0005E04,,9/7/2022,,1,$16 ,$16 ,R2-2-3
+Nibco,Mechanical,,,1/2 PVC T/U BALL CHK VLV,,3/17/2021,,1,, $-   ,R2-3-1
+Hope,Electrical,CDVI-06,,CDVI-06,,3/31/2021,,1,, $-   ,R2-3-1
+AB,Electrical,1492-J4,8310-3040,Terminal Blocks  SER A,,5/25/2021,,100,$1 ,$82 ,R2-3-2
+AB,Electrical,1492-J4-G,8310-3052,Terminal Blocks  SER A,,5/25/2021,,100,$1 ,$82 ,R2-3-2
+IFM,Electrical,SA4310,,sensor,,4/7/2021,,3,$206 ,$618 ,R2-4-1
+IFM,Electrical,E40228,,"Adapter for SM2/SM9 sensorsG2 BSPP to 2""NPT fitting",,4/7/2021,,1,$92 ,$92 ,R2-4-1
+IFM,Electrical,PN2698,83670081,Pessure sensor,,4/7/2021,,2,$298 ,$596 ,R2-4-1
+AB,Electrical,1585J-M4HBJM-2,,1585J-M4HBJM-2,,4/19/2021,,1,$25 ,$25 ,R2-4-2
+AB,Electrical,1585J-M8HB-2,,1585J-M8HB-2,,4/19/2021,,4,$20 ,$80 ,R2-4-2
+,Mechanical,,,Tubing for Cooler,,5/25/2021,,2, Bad Part? , $-   ,R2-4-3
+SMC,Electrical,KQ2P-09,,ORANGE PLUGS,,5/19/2021,,40,, $-   ,R2-5-1
+SMC,Electrical,KQ2P-7,,ORANG PLUGS,,5/19/2021,,100,, $-   ,R2-5-1
+SMC,Electrical,KQ2P-11,,ORANGE PLUGS BIG,,5/19/2021,,5,, $-   ,R2-5-1
+AB,Electrical,700-TBR24,,Terminal Block,,5/25/2021,,3,$11 ,$33 ,R2-5-2
+AB,Electrical,5069-OW16,,LOGIX 5000,,7/20/2022,,1,"$3,900 ","$3,900 ",R2-5-2
+ProMinent,Mechanical,1035417,,Main cable cpl. 5m UL/CSA 115V PLUG,,5/25/2021,,1,, $-   ,R2-5-3
+,Electrical,7700-44711-S4U0100,,ETHERNET CABLE 1M,,9/13/2022,,2, Bad Part? , $-   ,R2-5-3
+,Electrical,7700-A5021-U1D0300,,CABLE 3M,,9/13/2022,,2, Bad Part? , $-   ,R2-5-3
+IFM,Electrical,E43312,86189125,ADAPT G1/2-CLAMP,,9/15/2022,,1,$85 ,$85 ,R2-6-1
+EBS,Electrical,PS0759NGY,,HUBW 3/4 SWVL M L/T CON,,4/7/2021,,31,$12 ,$383 ,R2-6-1
+IFM,Electrical,E43312,86189125,ADAPT G1/2-CLAMP DIN 3267/2 3A AD,,9/13/2022,,1,$85 ,$85 ,R2-6-1
+,Mechanical,,,MOUNTING Brakets,,9/15/2022,,3, Bad Part? , $-   ,R2-6-2
+AB,Electrical,1756-IB32,,32Pt 12/24VDC D/I module,,8/5/2021,,3,$557 ,"$1,671 ",R2-6-3
+SMC,Electrical,KQ2Y09-36NS KQ2U11-13A KQ2Y11-37NS  KQ2ZT09-37NS,,Push Connectors,,5/7/2021,,1,, $-   ,R3-1-1
+Lechler,Mechanical,5992691Y01000,,"STATIC SPRAY BALL 2-1/2"" 316LSS",,9/13/2022,,2,, $-   ,R3-1-1
+Burkert,Electrical,ID-No  00424014,,FLOW 5030 PVDF WHEEL,,4/28/2021,,1,, $-   ,R3-1-2
+Burkert,Electrical,ID-No  00423913,,flow SE30/8030,,4/28/2021,,1,, $-   ,R3-1-2
+IFM,Electrical,PI2798,83670324,PRESSURE  SENSOR - -5...100.4 inH2O,,9/19/2022,,4,$354 ,"$1,416 ",R3-1-3
+Columbia Pipe,Mechanical,"191561 107 2"" DN50",,CHECK VALVE,,9/7/2022,,1,, $-   ,R3-1-3
+WOLSELEY,Mechanical,2-1/2 SS U BLT W DBC,,U- BOLT W HEX NUT,,9/14/2022,,21,, $-   ,R3-1-2
+HOFFMAN,Electrical,99411486,,MOUNTIONG BRACKETS,,9/7/2022,,1,, $-   ,R3-2-3
+SMC,Electrical,AXT100-DS25-050,,CABLE(VGA ONE END),,9/7/2022,,1,, $-   ,R3-3-1
+SMC,Electrical,AXT100-DS25-015,,CABLE(VGA ONE END),,9/7/2022,,1,, $-   ,R3-3-1
+IFM,Electrical,EVT092,,4-WIRE STRAIGHT M12 CONNECTOR CABLE 15M,,9/13/2022,,4,$22 ,$88 ,R3-3-3
+WOLSELEY,Mechanical,2-1/2 304SS 150# FLG,,NUT/BLT SET,,7/20/2022,,2,, $-   ,R3-4-1
+EMERSON,Electrical,SDN20-24-100C,,POWER SUPPLY   (IN 100-240V)  OUT 24V,,9/14/2022,,1,"$1,171 ","$1,171 ",R3-4-2
+HAYWARD,Mechanical,BFA3005TES,,"BUSHING 1/2""BF ST'D FLG TXT PPL EPDM",,6/24/2021,,1,, $-   ,R3-4-3
+McMASTER,Mechanical,,,UNION 3/8 BLACK,,6/24/2021,,1,, $-   ,R3-4-3
+McMASTER,Mechanical,,,"UNIONS 1/4"" BLACK",,6/24/2021,,4,, $-   ,R3-4-3
+IFM,Electrical,SM8100,,FLOW SENSOR,,7/20/2022,,1,$915 ,$915 ,R3-5-1
+GRACE PORT,Electrical,P-R2-K2RF3,,N4xETHERNET/GFCI 3A CB,,7/20/2022,,1,$250 ,$250 ,R3-5-1
+AB,Electrical,1734-TB3 ,,POINT I/O TERMINAL,,5/25/2021,,7,$28 ,$198 ,R3-5-2
+LCT,Electrical,WFLT-SM-2011-K250 110V ,,SOCKETM LIQUID LEVEL CONTROL,,6/15/2021,,7,, $-   ,R3-5-3
+IDEC,Electrical,PS5R-VD24 9HX02,,POWER SUPPLY,,9/7/2022,,2,, $-   ,R3-6-1
+CONTEC,Electrical,CPSL-08P1EN,,IO LINK MASTER MODULE 8 CHANNEL,,9/13/2022,,1,, $-   ,R3-6-1
+SMC,Electrical,1492-EBPGS-4,,END COVERS,,5/19/2021,,50,, $-   ,R3-6-2
+AB,Electrical,800T-QTH2A,,PILOT LIGHT 800T,,9/7/2022,,2,$109 ,$217 ,R3-6-2
+HUBBELL,Electrical,HBLDS6AC,,DISCONNECT SWITCH,,7/20/2022,,2,"$1,560 ","$3,120 ",R3-6-3
+WOLSELEY,Mechanical,5501898718,,2-1/2 SS U Blt W/Dbl Hex Nut,,3/16/2021,,2,, $-   ,R4-1-1
+AB,Electrical,1492-EBPGS-4,,End Barriers,,3/16/2021,,140,$1 ,$85 ,R4-1-1
+AB,Electrical,1606-XLE120E SER B,,1606-XLE120E SER B,,4/9/2021,,2,$170 ,$340 ,R4-1-1
+AB,Electrical,1606-XLE120E SER A,,1606-XLE120E SER A,,4/9/2021,,1,$170 ,$170 ,R4-1-1
+AB,Electrical,1494U-D200,,Disconnect switch,,3/10/2021,,1,"$1,000 ","$1,000 ",R4-1-2
+AB,Electrical,1494U-F200,,Fuse Block 200A,,3/10/2021,,1,$150 ,$150 ,R4-1-2
+AB,Electrical,1606-XLSBATASSY1,,Battery Module,,3/17/2021,,1,141,$141 ,R4-2-1
+Emerson,Electrical,SDN 20-24-4880CD,,Power Supply,,3/17/2021,,1,$725 ,$725 ,R4-2-1
+AB,Electrical,1492-PSG2-4,,term blocks,,4/7/2021,,79,$7 ,$553 ,R4-2-1
+SMC,Electrical,SY30M-2-1SA-N7,,SY30M-2-1SA-N7,,4/9/2021,,48,, $-   ,R4-2-1
+SMC,Electrical,SY50M-2-1DA-N7,,,,9/29/2022,,1,, $-   ,
+SMC,Electrical,SY3100-5U1,,SY3100-5U1,,4/9/2021,,16,, $-   ,R4-2-1
+AB,Electrical,1756-A10,,10 slots chassis,,8/5/2021,,2,$650 ,"$1,300 ",R4-2-2
+IFM,Electrical,SM2100,,FLOW METER,,5/4/2021,,1,$721 ,$721 ,R4-2-2
+DFT,Mechanical,835H7B4A5/8374,,CHECK VALVE,,9/29/2022,,1,, $-   ,R4-2-2
+AB,Electrical,1494U-D100,,100A DISCONECT SWITCH,,7/19/2022,,1,"$1,850 ","$1,850 ",R4-2-2
+AB,Electrical,1492-FB1J60,,1 Pole Fuse Holder,,5/12/2021,,6,$20 ,$120 ,R4-3-3
+AB,Electrical,1489-M1C040,,CIRCUIT BREAKER SER.D,,9/15/2022,,17,$66 ,"$1,122 ",R4-4-1
+IFM,Electrical,EVC629,,5-WIRE MICRO DC CORDSET ,,5/26/2021,,1,$56 ,$56 ,R4-4-3
+IFM,Electrical,EVC629,,CABLE,,9/29/2022,,1,$56 ,$56 ,R4-4-3
+IFM,Electrical,EVC838,,CABLE,,5/26/2021,,1,$15 ,$15 ,R4-4-3
+SMC,Electrical,VQ1101-5C1,,VALVES,,9/29/2022,,16,, $-   ,R4-5-1
+SMC,Electrical,SY50M-NO-A1,,VALVE,,9/29/2022,,2,, $-   ,R4-5-1
+SMC,Electrical,KQ2P-09,,PLUGS,,9/29/2022,,10,, $-   ,R4-5-1
+SMC,Electrical,KQ2P-07,,PLUGS,,9/29/2022,,10,, $-   ,R4-5-1
+SMC,Electrical,ANQC100-TR-04,,,,9/29/2022,,1,, $-   ,R4-5-1
+SMC,Electrical,SY3100-5U1,,"VALVES, 5 PORT SOLENOID",,6/15/2021,,37,, $-   ,R4-5-1
+SMC,Electrical,?,,RADS,,9/29/2022,,10,, $-   ,R4-5-2
+AB,Electrical,1756 HSC (Bad Part #),,CONTROLLOGIX,,9/8/2022,,4, bad Part? , $-   ,R4-5-2 (D.R PO)
+Columbia Pipe,Mechanical,835H7B4A5/8374,," 2"" 750 CWP DFT SCV CHECK VALVE",,6/14/2022,,1,, $-   ,R4-5-3
+EESCO,Electrical,78347201466,Yes,SOLA/H-D SDN 20-24-480CD POWER SUPPLY,,6/20/2022,,1,$836 ,$836 ,R4-5-3
+IFM,Electrical,E43344,,"Adapter G 1/2-SMS DN50/2""",,9/1/2022,,1,$112 ,$112 ,R5-5-2
+NIBCO,Mechanical,U45BC V,,Check valve 1/2 FKM(viton),,7/28/2021,,1,, $-   ,R5-6-2
+,Mechanical,,,Misc,,6/2/2021,,1, Bad Part? , $-   ,R5-6-3
+,Mechanical,"307F 1"" CF8M SW",,VALVES,,4/18/2022,,4, Bad Part? , $-   ,R6-1-1
+AB,Electrical,1734-TBS,,,46759,12/18/2023,,5,$24 ,$122 ,R3-5-3
+HUBBELL,Electrical,PS1009NGY,,,46759,12/18/2023,,8,, $-   ,R4-4-3
+AB,Electrical,2711PC-T6C20D8,,"PANELVIEW PLUS COMPACT 600 (6"")",,9/13/2022,,1, OBSOLETE , $-   ,R6-7-3
+ALFA LAVAL,Mechanical,B7WWMS-2-316L-PL,,TRI-WELD T,,9/7/2022,,6,$38 ,$230 ,R7-1-1
+ALFA LAVAL,Mechanical,B7WWMS-2.5-316L-PL,,TRI-WEL T,,9/7/2022,,1,$43 ,$43 ,R7-1-1
+,Electrical,,,MULTI CELL12-36V 2A,,4/19/2022,,1, Bad Part? , $-   ,R7-1-2
+AB,Electrical,1769-IF8  SER A,,,46759,12/18/2023,,2,$860 ,"$1,719 ",R5-2-2
+AB,Electrical,25B-D013N104,,PowerFlex 525 AC Drive,,6/28/2022,,1,"$2,086 ","$2,086 ",R7-2-1
+AB,Electrical,1756-OW16I,,16Pt digital relay module,,8/5/2021,,10,$630 ,"$6,300 ",R7-2-2
+BUSSMANN,Electrical,CHCC3DU,,FUSE HOLDER,46759,12/18/2023,,2,$62 ,$125 ,CR-CS-S4
+AB,Electrical,440R-H23180,,safety relay,,8/5/2021,,5, bad Part? , $-   ,R7-4-2
+IFM,Electrical,E40228,,ADAPTERS SST W O-RINGS,,6/16/2021,,2,$92 ,$184 ,R7-4-3
+,Electrical,700S-OF440EJC,,control relay,,8/5/2021,,1, bad Part? , $-   ,R7-5-2
+HUBBELL,Electrical,PR4X205EB,,20A GFCI NEMA,,8/5/2021,,1,$360 ,$360 ,R7-5-2
+,Electrical,A41,,Fuse holder,,8/5/2021,,4, bad Part? , $-   ,R7-5-2
+,Electrical,Z38,,Fuse Holder,,8/5/2021,,2, bad Part? , $-   ,R7-5-2
+,Electrical,A45,,Fuse holder,,8/5/2021,,3, bad Part? , $-   ,R7-5-2
+AB,Electrical,1585J-M8PBJM-0M3,,ETHERNET CABLE,,6/2/2021,,3,$20 ,$60 ,R7-5-3
+AB,Electrical,5069-RTB18-SCREW,,,,8/20/2021,,8,$53 ,$424 ,R7-6-1
+SMC,Electrical,EX500-AP050-8,,5000MM CABLE,,8/20/2021,,1,, $-   ,R7-6-1
+AB,Electrical,1401,,FUSE CLIPS,,6/2/2021,,3, bad Part? , $-   ,R7-6-2
+AB,Electrical,5069-RTB64-SCREW,,,,6/2/2021,,1,$29 ,$29 ,R7-6-2
+AB,Electrical,5069-RTB6-SCREW,,,,6/2/2021,,11,$18 ,$198 ,R7-6-2
+AB,Electrical,1734-OBB,,POINT I/O 8 POINT DIGITAL OUTPUT MODULE,,6/2/2021,,1,$86 ,$86 ,R7-6-3
+AB,Electrical,1489-M3C020,,,46759,12/18/2023,,2,$108 ,$216 ,R7-5-3
+SMC,Electrical,EX9-AC010EN-PSRJ,,CABLE,,6/2/2021,,1,, $-   ,R7-6-3
+SMC,Electrical,KQ2P-07,,PLUGS,,6/2/2021,,100,, $-   ,R7-6-3
+AB,Electrical,1489-M1C080,,,46759,12/18/2023,,2,$42 ,$84 ,R7-5-3
+BUSSMANN,Electrical,PDBFS220,,POWER DISTRIBUTION BLOCK,,4/19/2022,,3,$48 ,$145 ,R7-7-1
+,Electrical,,8-digit,TIMER WITH BASE(83011064),,4/19/2022,,1, Bad Part? , $-   ,R7-7-1
+,Electrical,,,RED/ORANGE TOWER LIGHT,,4/19/2022,,1, Bad Part? , $-   ,R7-7-1
+AB,Electrical,1494U-R1,,CONNECTING ROD,,9/14/2022,,1,$29 ,$29 ,R7-7-3
+IFM,Electrical,TD2933,95943595,TEMPERATURE TRANSMITTER,,9/14/2022,,2,$144 ,$287 ,R7-7-3
+AB,Electrical,1494U-HS1,,STAINLESS DISCONNECT HANDLE (SMALL),,9/14/2022,,1,$213 ,$213 ,R7-7-3
+WALCHEM,Electrical,1611091844,,WEBMASTER CONTOLLER,,9/7/2022,,1,, $-   ,R-FLOOR
+WALCHEM,Electrical,WEL-PHF-12,,WALCHEM PROBE,,9/7/2022,,16,, $-   ,R-FLOOR
+WALCHEM,Electrical,WEL-PHF-NN,,ELECTRODE.PH.FLAT SURFACE,,9/7/2022,,2,, $-   ,R-FLOOR
+Zilmet,Mechanical,INOX-PRO ZS 20018,,WATER EXPENSION TANK SS - 4 gallon,,9/13/2022,,1,, $-   ,TBD FLOOR
+?,,95730509,,"Install Kit 1004 PV/V/C-3/8""X1",,3/17/2021,,2, Bad Part? , $-   ,TBD-floor
+AB,Electrical,1494U-C24,,4ft cable mech,,3/10/2021,,1,$360 ,$360 ,TBD-floor
+B&R,Electrical,5S3DC0000000L0-002,,Automation PC 3100 7300UB 128M W10 Z,,3/17/2021,,1,, $-   ,TBD-floor
+AB,Electrical,1494U-PC200,,Protective cover,,3/10/2021,,1,$149 ,$149 ,TBD-floor
+AB,Electrical,1783-US16T  SER B,,,,10/17/2022,,3,$588 ,"$1,764 ",R7-1-2
+GRUNDFOS,Mechanical,97722763,,DDA 30-4 FCM-PV/T/C-F-321004BG,,9/14/2022,,2,, $-   ,TBD-FLOOR
+AB,Electrical,1606-XLS480F-3 ,,,,10/17/2022,,6,$611 ,"$3,665 ",R6-6-1
+AB,Electrical,1489-SM1C100,,,46759,12/18/2023,,6, bad Part? , $-   ,R7-5-3
+AB,Electrical,1606-XLS480F-3 SER A,,,,10/17/2022,,3,$611 ,"$1,833 ",R6-6-2
+AB,Electrical,5069-OB16  SER A ,,,,10/17/2022,,7,$339 ,"$2,372 ",R5-5-1
+AB,Electrical,1606-XLE240E  SER B,,,,10/17/2022,,1,$228 ,$228 ,R6-5-3
+AB,Electrical,1769-IF8  SER A,,,,10/17/2022,,3,$846 ,"$2,538 ",R6-5-3
+AB,Electrical,1769-ECR  SER A,,,,10/17/2022,,1,$37 ,$37 ,R6-5-3
+AB,Electrical,1734-TB3  SER A,,,,10/17/2022,,20,32.2,$644 ,R7-2-1
+AB,Electrical,5069-OW16  SER B,,,,10/17/2022,,3,$691 ,"$2,073 ",R6-5-3
+AB,Electrical,5069-OW16  SER B,,,,10/17/2022,,6,$691 ,"$4,146 ",R6-7-1
+AB ,Electrical,EB-PSE-24V-1A,,,,10/17/2022,,2,$1 ,$2 ,R6-4-3
+AB,Electrical,5069-FPD   SER A,,,,10/17/2022,,3,$155 ,$465 ,R6-4-2
+AB,Electrical,1769-ECR   SER A,,,,10/17/2022,,1,$37 ,$37 ,R6-4-1
+AB,Electrical,5069-RTB64-SCREW   SER A,,,,10/17/2022,,8,$34 ,$272 ,R7-3-2
+AB,Electrical,5069-RTB18-SCREW,,,,10/19/2022,,26,$61 ,"$1,586 ",R4-3-1
+AB,Electrical,5069-RTB6-SCREW,,,,10/19/2022,,13,$21 ,$273 ,R4-3-1
+AB,Electrical,5069-RTB4-SCREW (Bad Part #),,,,10/19/2022,,2, bad Part? , $-   ,R4-3-1
+HOFFMAN,Electrical,UUMF   33800,5000-1558,MOUNTING FOOT KIT,,10/19/2022,,12,, $-   ,R4-2-1
+AB,Electrical,700-HA32A1-4   SER D,, ,,10/19/2022,,4,$23 ,$91 ,R4-3-1
+AB,Electrical,700-HA32Z24-4   SER D,,,,10/19/2022,,2,$22 ,$43 ,R4-3-1
+AB,Electrical,508TX-A  10-30V  0.5A,,,,10/19/2022,,1, bad Part? , $-   ,R3-3-2
+AB,Electrical,1606-XLS480F-3   SER A,,,,10/19/2022,,1,$611 ,$611 ,R3-3-2
+AB,Electrical,1734-IE8C  SER C,,,,10/19/2022,,1,$980 ,$980 ,R3-5-2
+HOFFMAN,Electrical,65750/CMFKSS   ,,SS MOUNTING FOOT KIT,,10/19/2022,,1,, $-   ,R3-4-1
+AB,Electrical,5069-OA16,,,,10/19/2022,,1,$679 ,$679 ,R3-5-2
+AB,Electrical,1734-TB   SER A,,,,10/19/2022,,1,$24 ,$24 ,R3-5-2
+IFM,Electrical,E234978,,ETHR CABLE ( APR 30 FT) ONE END OPEN,,10/19/2022,,1,, $-   ,R7-1-1
+AB,Electrical,1585J-M8CBJM-1,,,,10/19/2022,,4,, $-   ,R7-1-1
+AB,Electrical,1585J-M8HB-2  SER A,,,,10/19/2022,,1,, $-   ,R7-1-1
+rf IDEAS,Electrical,RDR-805W1AKB-P,,,,10/19/2022,,1,, $-   ,R7-1-1
+HUBBELL,Electrical,HUBW PR20 20A 120V,,P/N;78358552482,,10/19/2022,,1,, $-   ,R3-3-1
+AB,Electrical,100-C09EJ10,,,,10/19/2022,,1,$152 ,$152 ,R4-3-1
+AB,Electrical,1492-FBIJ60  60A 600V,,,,10/19/2022,,1, bad Part? , $-   ,R4-3-1
+AB,Electrical,1694-PM244-CL2,,,,10/19/2022,,1,$53 ,$53 ,R4-3-1
+BURKERT,Electrical,8619 MILTICELL,,MODULAR TRANSMITER,,10/19/2022,,1,, $-   ,R3-3-1
+AB,Electrical,5069 AENTR,,,,10/27/2022,,1,$874 ,$874 ,R4-4-2
+AB,Electrical,1734-IE8C  SER C,,,46759,11/9/2023,,1,$980 ,$980 ,R3-5-2
+ProMinent,Mechanical,7803799,,prominent pump shelves,,11/14/2022,,3,, $-   ,F&B small rack
+Anderson,Mechanical,DA2,,Conductivity Analyzer,,11/14/2022,,11,, $-   ,F&B small rack
+AB,Electrical,1734-IA4,,,,11/15/2022,,4,$147 ,$588 ,R3-5-2
+AB,Electrical,1734-OA4,,,,11/15/2022,,4,$187 ,$748 ,R3-5-2
+AB,Electrical,1734-TB3,,,,11/15/2022,,8,32.2,$258 ,R3-5-3
+AB,Electrical,1734-TOP  SER A,,,,11/15/2022,,1,18.67,$19 ,R3-3-2
+AB ,Electrical,1734-AENTR,,,,11/15/2022,,1,$652 ,$652 ,R2-6-3
+HOPE,Electrical,CDVI-06,,ADAP-DPM-DVIIF CDVI-06,,11/15/2022,,1,, $-   ,R7-7-1
+R MANNO,Mechanical,1299-38-SS,,3/4 X 1-1/2 X .380 SPACER STANDOFF,46759,12/18/2023,,55,, $-   ,R2-1-2
+AB,Electrical,1756-ENBT,,,,11/15/2022,,1, OBSOLETE , $-   ,R3-6-2
+AB,Electrical,1769-IF8  SER A,,,46759,12/18/2023,,2,$860 ,"$1,719 ",R7-3-2
+HOPE,Electrical,CDVI-06,,,,11/15/2022,,3,, $-   ,R3-4-3
+AB,Electrical,1492-SPM1C200,,,,11/15/2022,,1,$30 ,$30 ,R4-3-1
+AB,Electrical,1494U-FC30J,,,46759,12/18/2023,,5,$29 ,$146 ,R2-1-2
+McMASTER,Mechanical,4596K73,,1/2 NPT MALE,46759,12/18/2023,,8,, $-   ,R3-1-3
+AB,Electrical,700-HA32A1-4   SER D,,,,11/15/2022,,1,$23 ,$23 ,R4-3-1
+PANDUIT,Electrical,UTP28SP3YL,,"Cat 6 Ethernet Cable, Unshielded, Yellow, 3ft",,11/15/2022,,14,, $-   ,R3-4-3
+PANDUIT,Electrical,UPT28SP6YEL,,"Cat 6 Ethernet Cable, Unshielded, Yellow, 6ft",,1/30/2024,,3,, $-   ,R7-1-1
+PANDUIT,Electrical,UPT28SP8INYL,,"Cat 6 Ethernet Cable, Unshielded, Yellow, 8in",,11/15/2022,,10,, $-   ,R7-1-1
+SMC,Electrical,EX500-AC030-SSPS,,CABLE,,11/15/2022,,2,, $-   ,R7-2-1
+IFM,Electrical,EVF044,,,,11/15/2022,,1,$33 ,$33 ,R7-2-1
+SMC,Electrical,EX500-AC100-SSPS,,,,11/15/2022,,1,, $-   ,R7-2-1
+McMASTER,Mechanical,4881K233,,PIPE FITTING FLANGED,46759,12/18/2023,,1,, $-   ,R2-1-1
+TRIPP-LITE,Electrical,P566AB-006,,"HDMI to DVI-D Cable, 6ft",,11/15/2022,,6,, $-   ,R7-3-3
+,Electrical,OL9668,,LITKIT DATUN,,11/15/2022,,1, Bad Part? , $-   ,R7-3-3
+GRUNDFOS,Electrical,98589048,,3 M CABLE,,11/15/2022,,1,, $-   ,R7-2-2
+AB,Electrical,700S-CF440EJC,,,,12/1/2022,,2,$218 ,$436 ,R2-3-3
+AB,Electrical,2711P-T10C21D8S,,PANEL VIEW 10.4 IN,,12/1/2022,,1,"$2,874 ","$2,874 ",CR-C4-S3
+,Electrical,WD10EFRX,,,,12/1/2022,,1, Bad Part? , $-   ,R2-3-3
+McMASTER,Mechanical,4882K18,,PVC PIPE NIPPLE,46759,12/18/2023,,5,, $-   ,R5-3-1
+AB,Electrical,800H-JR2A,,,,12/1/2022,,3,$51 ,$154 ,R2-3-3
+AB,Electrical,140MT-D9E-C16,,,,12/1/2022,,3,$163 ,$489 ,R2-3-3
+AB,Electrical,BUSS RNQ-R-2 ,,CLASS CC TIME DELAY,,12/1/2022,,6, bad Part? , $-   ,R2-3-3
+IFM,Electrical,EVT064,,,,12/1/2022,,1,$8 ,$8 ,R2-4-2
+,Electrical,APC3100 7300U8 128M W10 2,,PC ,,12/1/2022,,1, Bad Part? , $-   ,CR-C4-S1
+AB,Electrical,700S-CF440EJC,,,,12/1/2022,,4,$218 ,$872 ,R2-3-2
+IFM,Electrical,E43312,86189125,ADAPTER,,12/1/2022,,1,$85 ,$85 ,R2-3-3
+AB,Electrical,1734-IE4C,,,46759,12/18/2023,,8,$525 ,"$4,197 ",R6-5-1
+AB,Electrical,855T-BVMC,,,,12/1/2022,,1, Bad Part? , $-   ,R2-2-2
+AB,Electrical,855T-B24DN4,,,,12/1/2022,,1, OBSOLETE , $-   ,R2-2-2
+AB,Electrical,800H-FRXJTQH2RA5,,,,12/1/2022,,1,$98 ,$98 ,R3-2-2
+AB,Electrical,1734-OW2,,,46759,12/18/2023,,1,$114 ,$114 ,R6-5-1
+AB,Electrical,194R-PY,,,,12/1/2022,,1,$32 ,$32 ,R3-2-1
+AB,Electrical,1492-H5,8310-3012,,,12/1/2022,,25,$16 ,$389 ,R3-2-1
+AB,Electrical,1734-OW2,,,46759,12/18/2023,,3,$114 ,$342 ,R6-5-1
+AB,Electrical,1489-M1C150,,,,12/1/2022,,3,$42 ,$126 ,R3-2-1
+AB,Electrical,1494U-NO,,,,12/1/2022,,1,33.48,$33 ,R3-2-1
+AB,Electrical,1494U,,HANDLE HARDWARE KIT (PN 266083),,12/1/2022,,1, OBSOLETE , $-   ,R3-2-1
+AB,Electrical,800H-FRXTQH2RA1,8390-1008,,,1/30/2024,,4,$143 ,$573 ,R4-4-1
+AB,Electrical,1494u-J100-CR-PC-S,,,,12/14/2022,,1,$924 ,$924 ,CR-C5-S4
+Emerson,Electrical,E250,,POWER SUPPLY,,12/14/2022,,1, bad Part? , $-   ,CR-C5-S4
+AB,Electrical,1497-6-BASV-3-N,,CONTROL CIRCUIT TRANSFORNER,,12/14/2022,,1, bad Part? , $-   ,CR-C5-S4
+AB,Electrical,1492-ACABLE010Y,,,,12/14/2022,,1,$148 ,$148 ,CR-C5-S4
+AB,Electrical,1492-ACABLE010X,,,,12/14/2022,,1,$148 ,$148 ,CR-C5-S4
+AB,Electrical,1492-ACABLE010TB,,,,12/14/2022,,1,$210 ,$210 ,CR-C5-S4
+Emerson,Electrical,SDN40-24-480C,,POWER SUPPLY,,12/14/2022,,1,"$1,114 ","$1,114 ",CR-C5-S5
+Emerson,Electrical,SDN2024480CD,,POWER SUPPLY,,12/14/2022,,2,$725 ,"$1,449 ",CR-C5-S5
+AB,Electrical,1492-SPM1C040,,,,12/14/2022,,5,$31 ,$155 ,R6-3-1
+AB,Electrical,1489-M1C016,,,,12/14/2022,,1,$42 ,$42 ,R6-3-1
+AB,Electrical,1489-M1C350,,,,12/14/2022,,1,$42 ,$42 ,R6-3-1
+AB,Electrical,1585J-M8HB-2,,,46759,12/18/2023,,1,$22 ,$22 ,R2-4-2
+AB,Electrical,140M-F8E-C32,,,46759,12/18/2023,,2, Bad Part? , $-   ,R7-6-3
+AB,Electrical,440R-F23199,,,,12/14/2022,,4, Bad Part? , $-   ,R6-3-1
+AB,Electrical,1492-AIFM6S-3,,,,12/14/2022,,2,$157 ,$315 ,R6-3-2
+AB,Electrical,1734-FPD,,,46759,12/18/2023,,2,$116 ,$232 ,R7-4-2
+AB,Electrical,1734-EP24DC,,,,12/14/2022,,1,$204 ,$204 ,R6-3-2
+BIMBA,Mechanical,PIV-60-050/075,,PNEUMATIC ISOLATION VALVE,,12/14/2022,,1,, $-   ,R6-3-3
+AB,Electrical,700S-CF440EJC,,SAFETY CONTROL RELAY,,12/19/2022,,1,$218 ,$218 ,R6-4-3
+AB,Electrical,1756-IB16,,,,12/19/2022,,4,$423 ,"$1,692 ",R6-2-1
+AB,Electrical,1756EN2T,,,,12/19/2022,,2,"$2,909 ","$5,818 ",R6-2-1
+AB,Electrical,1769-PB4,,,,12/19/2022,,1,$492 ,$492 ,R6-2-2
+Emerson,Electrical,SDN2024480CD,,POWER SUPPLY,,12/19/2022,,1,$725 ,$725 ,R6-2-2
+AB,Electrical,1494U-F60,,,,12/19/2022,,1,$30 ,$30 ,R6-2-2
+IFM,Electrical,TD2937,,,,12/19/2022,,1,$242 ,$242 ,R6-2-2
+AB,Electrical,1494U-R1,,,,12/19/2022,,1,$29 ,$29 ,R6-2-3
+IFM,Electrical,E40228,,,,12/21/2022,,1,$92 ,$92 ,R3-5-1
+AB,Electrical,1494F-S1,,STAINLESS DISCONNECT HANDLE (SMALL),,12/21/2022,,1,$286 ,$286 ,R6-3-3
+AB,Electrical,SN4000,,,,12/21/2022,,1, Bad Part? , $-   ,R6-3-3
+AB,Electrical,25B-D010N114,,,,1/5/2023,,1,"$1,380 ","$1,380 ",R7-1-2
+WOLSELEY,Mechanical,DS44NJS,,"1-1/2""X5 S40 304L WLD NIP TBE",46759,12/18/2023,,1,, $-   ,R5-5-2
+AB,Electrical,1492-FB2J30-L,,FUSE HOLDER,,3/13/2023,,2,$47 ,$93 ,R2-5-2
+HOFFMAN,Electrical,UU606030,5000-1557,"24""x24""x12"" FG ENCLOSURE 4321 VFD CUT ",,3/14/2023,,3,$638 ,"$1,915 ",F&B SHOP
+AB,Electrical,1694-PF1244,,,,3/21/2023,,1,$18 ,$18 ,R1-1-2
+AB,Electrical,1734-TB3,,,,4/24/2023,,1,32.2,$32 ,R3-1-3
+SCHNEIDER,Electrical,BS811QS,,2 1/2 ADAPTER/TRI CLAMP,,4/24/2023,,3,, $-   ,R3-1-1
+IFM,Electrical,E40200,,,,4/24/2023,,3,$38 ,$113 ,R2-2-1
+IFM,Electrical,US0043,,,,4/24/2023,,1,$172 ,$172 ,R2-4-3
+SWAGELOK,Mechanical,S04465179B,,MALE ADAPTER 1/2 TUBE X 3/8 MALE PIPE,,4/24/2023,,10,, $-   ,R2-3-1
+AB,Electrical,855T-ABCAP,,,,4/24/2023,,1,$6 ,$6 ,R2-3-1
+AB,Electrical,1942-SPM1C040,,,,4/24/2023,,1, bad Part? , $-   ,R3-5-3
+AB,Electrical,1489-M1C010,,,,4/24/2023,,1,$42 ,$42 ,R3-5-3
+EATON,Electrical,CC600V 30A,,FUSE HOLDER,,4/24/2023,,1, bad Part? , $-   ,R3-5-3
+,,,,,,,,,,,
+AB,Electrical,1734-OE4C   SER C,,,,4/24/2023,,1,$595 ,$595 ,R2-5-2
+AB,Electrical,1734-IE8C  SER C,,,,4/24/2023,,1,$980 ,$980 ,R2-5-2
+AB,Electrical,700-HLT12,,,,4/24/2023,,2, Bad Part? , $-   ,R2-5-2
+EATON,Electrical,MDL-2-R,,FUSES,,4/24/2023,,10,$2 ,$16 ,R2-5-2
+HTM,Electrical,Z-FS3KAV085,,CABLES,,4/24/2023,,3,, $-   ,R5-4-1
+HTM,Electrical,R-FS5TZV075,,CABLES,,4/24/2023,,3,, $-   ,R5-4-1
+,Mechanical,213918,,21MP-2 1/2 X 2 1/2-316L-7 ADAPTER,,4/24/2023,,2, Bad Part? , $-   ,R5-4-1
+AB,Electrical,1494U-LA36,,,,4/24/2023,,1,3.34,$3 ,R5-4-1
+,Mechanical,240982,,L32-3X2-316L-7 TUBE ADAPTER,,4/24/2023,,1, Bad Part? , $-   ,R5-4-1
+AB,Electrical,1494U-PB31,,,,4/24/2023,,2,$8 ,$17 ,R5-4-2
+SMC,Electrical,KQG2E11-N03,,,,4/24/2023,,7,, $-   ,R5-4-2
+,Electrical,10250TC1N,,RED LENS,,4/24/2023,,3, Bad Part? , $-   ,R5-4-2
+AB,Electrical,1734-IE2C,,,,4/24/2023,,2,$328 ,$655 ,R2-5-2
+BUSSMANN,Electrical,PDBFS220,,"175A-600V,  IEC-60647-7-1",,12/18/2023,,2,$48 ,$97 ,R7-5-3
+AB,Electrical,800H-QRH2R,,,,4/24/2023,,1,$85 ,$85 ,R2-5-2
+AB,Electrical,1492-SPM1C040,,,,4/24/2023,,4,$31 ,$124 ,R2-5-2
+AB,Electrical,140MT-D9V-C40,,,,4/24/2023,,2,$248 ,$496 ,R2-5-2
+AB,Electrical,1489-M1C150,,,,4/24/2023,,1,$42 ,$42 ,R2-5-2
+AB,Electrical,1489-M3C010,,,,4/24/2023,,1,$42 ,$42 ,R5-5-2
+AB,Electrical,800H-FRXJTQH2RA5,,,,4/24/2023,,1,$98 ,$98 ,R5-5-2
+AB,Electrical,1606-XLE240E,,POWER SUPPLY,,4/24/2023,,1,204.3,$204 ,R5-5-2
+AB,Electrical,1734-OW2,,,,4/24/2023,,2,$113 ,$226 ,R2-5-2
+AB,Electrical,CHCCIDIU,,600V,,4/24/2023,,1, Bad Part? , $-   ,R5-5-2
+Goulds,Mechanical,10SV6GB30,Maybe?,PUMP,,5/2/2023,,1,, $-   ,Shop small rack
+BUSSMANN,Electrical,PDBFS220,,Distribution blocks,,5/8/2023,,2,$52 ,$104 ,R2-5-1
+AB,Electrical,1734-IB8,,,,5/9/2023,,1,$125 ,$125 ,R2-4-3
+AB,Electrical,1783-US5T SER B,,,,5/9/2023,,2,$139 ,$277 ,R1-4-1
+AB,Electrical,1489-M1C030 SER. D,,,,5/9/2023,,2,$42 ,$84 ,R5-3-1
+AB,Electrical,1489-M1C010,,,,5/9/2023,,1,$42 ,$42 ,R5-3-1
+AB,Electrical,1489-M1C005,,,,5/9/2023,,1,$42 ,$42 ,R5-3-1
+BUSSMANN,Electrical,CHCC2DU CCP,,FUSE HOLDER,,5/9/2023,,1,$38 ,$38 ,R5-3-1
+AB,Electrical,1492-PSG2-4,,"Allen-Bradley® Terminal Block, 250VAC/DC, 13.5A, 26-14 AWG, 3.50 in. L",,5/9/2023,,30,$9 ,$277 ,R5-3-1
+BUSSMANN,Electrical,BUSS LP-CC-2,,,,5/9/2023,,2,, $-   ,R5-3-1
+AB,Electrical,1769-PB4,,,,5/9/2023,,1,$500 ,$500 ,R5-2-1
+AB,Electrical,1492-FB1J60-L,,,,5/9/2023,,1,$25 ,$25 ,R5-2-1
+SMC,Electrical,EXP500-AP050-A,,CABLE,,5/9/2023,,1,, $-   ,R5-2-2
+,Electrical,43-15238,,CABLE,,5/9/2023,,1, Bad Part? , $-   ,R5-2-2
+AB,Electrical,1585J-M8TB-2,,CABLE,,5/9/2023,,4,$22 ,$87 ,R6-1-3
+AB,Electrical,1585J-M8HBJM-4,,CABLE,,5/9/2023,,3,$43 ,$130 ,R6-1-3
+AB,Electrical,1585J-MHB-2,,CABLE,,5/9/2023,,2, Bad Part? , $-   ,R6-1-3
+AB,Electrical,1585J-M8PBJM-0M6,,CABLE,,5/9/2023,,1,$22 ,$22 ,R6-1-3
+AB,Electrical,889D-F8AB-10,,CABLE,,5/9/2023,,1,$55 ,$55 ,R6-1-3
+AB,Electrical,889D-F4AC-10,,CABLE,,5/9/2023,,1,$25 ,$25 ,R6-1-3
+AB,Electrical,800H-QRT24R,,,,5/9/2023,,1,$90 ,$90 ,R6-4-3
+AB,Electrical,1756-OF8I,,,,5/9/2023,,1,"$3,129 ","$3,129 ",R6-5-2
+BUSSMANN,Electrical,LPJ-30SP,,,,6/8/2023,,3,$39 ,$117 ,R2-4-3
+AB,Electrical,1756-IB16,,,,6/13/2023,,2,$427 ,$854 ,R6-5-1
+AB,Electrical,1794-AENT,,,,6/13/2023,,2,"$1,100 ","$2,200 ",R6-2-3
+AB,Electrical,1492-IFM20F,,,,6/13/2023,,1,$111 ,$111 ,R6-2-3
+AB,Electrical,1734-OA4,,,,6/13/2023,,30,$188 ,"$5,651 ",R5-2-1
+AB,Electrical,1734-IA4,,,,6/13/2023,,20,$148 ,"$2,957 ",R5-2-1
+AB,Electrical,5069-OW16,,,,6/13/2023,,6,$698 ,"$4,186 ",R6-1-2
+AB,Electrical,2080-LC50-24QWB,5000-1704,,,6/13/2023,,1,$524 ,$524 ,R5-3-2
+AB,Electrical,1756-ENBT,,,,6/13/2023,,1, obSOLETE , $-   ,R5-3-2
+AB,Electrical,5069-FPD,,,,6/13/2023,,2,$157 ,$313 ,R5-3-2
+AB,Electrical,700S-CF440EJC,,,,6/13/2023,,2,$218 ,$436 ,R5-3-3
+AB,Electrical,1734-IA4,,,,6/13/2023,,30,$148 ,"$4,436 ",R5-3-3
+AB,Electrical,1606-XLE240E,,,,6/13/2023,,1,$274 ,$274 ,R5-3-3
+AB,Electrical,5069-RTB64-SCREW,,,,6/13/2023,,1,$34 ,$34 ,R5-3-3
+AB,Electrical,440R-S13R2,,,,11/8/2023,,1,$248 ,$248 ,R5-4-2
+IFM,Electrical,EVC812,,Male Wirable Plug,,2/15/2024,,7,$19 ,$133 ,R5-2-2
+OMRON,Electrical,H3CA-8,,RELAY,,6/13/2023,,1,, $-   ,R5-2-3
+AB,Electrical,194R-PY,,,,6/13/2023,,1,$32 ,$32 ,R5-2-3
+AB,Electrical,140MT-D9E-C16,,,,6/13/2023,,1,$163 ,$163 ,R5-2-3
+AB,Electrical,1489-M1C010,,,,6/13/2023,,1,$42 ,$42 ,R5-2-3
+AB,Electrical,800H-QRT24R,,,,6/13/2023,,1,$90 ,$90 ,R5-2-3
+AB,Electrical,1494U-LA36,,,,11/8/2023,,2,3.34,$7 ,R5-4-2
+AB,Electrical,1734-IE8C  SER C,,,,6/13/2023,,3,$989 ,"$2,967 ",R5-2-3
+BUSSMANN,Electrical,CH60J1L,,FUSE HOLDER,,6/13/2023,,3, Bad Part? , $-   ,R5-2-3
+BUSSMANN,Electrical,CHCC,,FUSE HOLDER,,6/13/2023,,1,$62 ,$62 ,R5-2-3
+AB,Electrical,1769-OW16,,,,6/13/2023,,1,$442 ,$442 ,R5-2-3
+AB,Electrical,1794-IE8,,,,6/13/2023,,1,"$1,020 ","$1,020 ",R5-2-3
+AB,Electrical,PN-184856,,RUBBER  GASKETS (BAG),,6/13/2023,,1, Bad Part? , $-   ,R5-2-3
+AB,Electrical,2080-LC50-24QBB,,,,6/13/2023,,1,$524 ,$524 ,R5-2-3
+AB,Electrical,1734-OE4C   SER C,,,,6/29/2023,,2,$601 ,"$1,202 ",R3-2-1
+SMC,Electrical,EX500-AP050-A,,Power Cable 5m,,6/29/2023,,4,, $-   ,R5-6-1
+AB,Electrical,1734-OB8,,,,7/12/2023,,3,$606 ,"$1,819 ",R6-4-3
+AB,Electrical,1747-AENTR,,,,7/12/2023,,1,"$2,450 ","$2,450 ",R6-4-3
+Graybar,Electrical,ACP2x2ACUL,,,,7/18/2023,,1,, $-   ,Cubicle
+Partlow,Electrical,95943882,95943882,RCDR CIP PARTLOW  note: all setup,,7/26/2023,,1, Bad Part? , $-   ,Cubicle
+Enerquip,Mechanical,"CIP HEAT EXCHANGER 3""",,,,7/21/2023,,1,, $-   ,F&B Floor
+Goulds,Mechanical,10SV6GG4F60  5HP,Maybe?,PUMP No-Washdown,,6/21/2023,,1,, $-   ,F&B Floor
+,Electrical,52010285,,CABLE (4 WIRES) 90DEG,,8/28/2023,,10, Bad Part? , $-   ,R5-6-1
+DFT,Mechanical,"1"" 750 CWP DFT SCV",,CHECK VALVE,,8/29/2023,,1, Bad Part? , $-   ,R6-5-1
+AB,Electrical,1494U-FC100J,,,,8/29/2023,,1,$109 ,$109 ,R6-5-1
+AB,Electrical,2080-LC50-24QWB,5000-1704,,,8/29/2023,,1,$524 ,$524 ,R6-6-2
+EH,Electrical,FTL31-1FH9/0,,,,8/29/2023,,1,, $-   ,R6-6-2
+AB,Electrical,1794 PS13,,POWER SUPPLY 24VDC,,8/29/2023,,1,$219 ,$219 ,R6-5-3
+SMC,Electrical,SY30M-2-1SA-N7-NA,,,,8/29/2023,,4,, $-   ,R6-3-2
+SMC,Electrical,SY50M-3-1A-C0-NA,,,,8/31/2023,,3,, $-   ,R3-6-1
+IFM,Electrical,AL1940,,IO LINK,,8/31/2023,,2,$410 ,$821 ,R6-1-2
+AB,Electrical,1489-M1C030 SER. D,,,,8/31/2023,,2,$42 ,$84 ,R3-3-2
+AB,Electrical,1489-M1C010,,,,8/31/2023,,1,$42 ,$42 ,R3-3-2
+IFM,Electrical,US0049,,ADAPTER,,8/31/2023,,4,$94 ,$375 ,R3-3-2
+IFM,Electrical,TD2937,,,,8/31/2023,,1,$242 ,$242 ,R3-3-2
+AB,Electrical,194R-SDK2,,KIT,,9/7/2023,,1,$104 ,$104 ,R5-7-1
+AB,Electrical,1756-A13,,I/O RACK,,9/13/2023,,1,$881 ,$881 ,R2-6-1
+SMC,Electrical,SY50M-1-1A-N11-NA,,,,9/13/2023,,2,, $-   ,R3-6-1
+AB,Electrical,1756-PA75   SER B,,,,9/13/2023,,1,"$1,320 ","$1,320 ",R3-6-1
+AB,Electrical,1734-TB3,,,,9/13/2023,,3,$33 ,$98 ,R2-3-1
+AB,Electrical,1734-TBS,,,,9/13/2023,,5,$24 ,$122 ,R2-3-1
+AB,Electrical,1694-PF1244,,,,9/13/2023,,1,$18 ,$18 ,R1-4-3
+AB,Electrical,1734-OB8,,,,9/13/2023,,1,$606 ,$606 ,R6-4-3
+WOLSELEY,Mechanical,1/2 PVC,,BALL CHECK VALVE,,9/13/2023,,5,, $-   ,R1-1-1
+AB,Electrical,1756-LSC8XIB8I,,controllogix 8,,10/27/2023,,2,"$1,242 ","$2,485 ",R5-5-2
+AB,Electrical,1940,,,,9/20/2023,,1,, $-   ,R4-3-3
+AB,Electrical,1494U-J60-CR-PC-S,,Disconnect Switch,,9/21/2023,,4,$683 ,"$2,730 ",Cubicle
+AB,Electrical,1494U-J30-CR-PC-S,,Disconnect Switch,,9/21/2023,,2,$644 ,"$1,287 ",Cubicle
+AB,Electrical,1494U-J60-C3-PC-S,,Disconnect Switch,,9/21/2023,,1,$683 ,$683 ,Cubicle
+Alfa Laval,Mechanical,9634097647,,LKH20M165S2EN21AAN-010A36WSP PUMPW/9634084643 STER. MTR,,9/21/2023,,2,"$4,417 ","$8,834 ",Pierce Warehouse
+AB,Electrical,440R-S13R2,,,,10/17/2023,,1,$248 ,$248 ,R6-3-2
+SMC,Electrical,KQG2U09-11,,,,10/17/2023,,7,, $-   ,R6-3-2
+Alfa Laval,Mechanical,9613403954,,LINER BKS DN25 H3,46759,12/18/2023,,8,$26 ,$204 ,R1-1-2
+AB,Electrical,1756-OB32,,,46759,12/28/2023,,1,$797 ,$797 ,R6-7-2
+1045918    HOPE INDUSTRIAL SYSTEMS INC,Electrical,CDVI-06 - DVI-D,,"Dual Link M-M Cable, 1.8",,9/20/2022,,6,$10 ,$60 ,CR-C4-S4
+1045104    HARTFIEL AUTOMATION INC,Electrical,DDAA-1BA - MAC 24VDC,,Coil,,9/20/2022,,10,13.1,$131 ,CR-C3-S4
+IFM,Electrical,AL1920 - IO Link Master -CIP Skid,,AL1920 - IO Link Master -CIP Skid,,5/17/2023,,19,343.5,"$6,527 ",CR-C6-S5
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,"LP-CC-20 - DISCONNECT FUSE BUSSMANN, 20A",,"LP-CC-20 - DISCONNECT FUSE BUSSMANN, 20A",,9/20/2022,,6,10.87,$65 ,CR-C4-S4
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,1585J-M8HB-2 - 2m ETHERNET CABLE 600V RA,,1585J-M8HB-2 - 2m ETHERNET CABLE 600V RA,,9/20/2022,,3,19.04,$57 ,CR-C4-S4
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,"25B-D013N104 - Drive, PowerFlex 525, 380",,"25B-D013N104 - Drive, PowerFlex 525, 380",,9/20/2022,,3,"1,028.80","$3,086 ",CR-C4-S2
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,"140M-D8E-C16 - Breaker, Motor Protection",,"140M-D8E-C16 - Breaker, Motor Protection",,9/20/2022,,3,146.61,$440 ,Still to be delivered
+HOFFMAN,Electrical,A24P24G,5000-1557,Back Plate,,3/14/2023,,20,$46 ,$920 ,F&B SHOP
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,"A24P24 - 21""x21"" BACK PANEL",8390-6034,"A24P24 - 21""x21"" BACK PANEL",,9/20/2022,,3,$46 ,$138 ,TBD-SHOP
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,2080-LC50-24QWB - PLC CPU MICRO 850,5000-1704,2080-LC50-24QWB - PLC CPU MICRO 850,,9/20/2022,,3,440.07,"$1,320 ",CR-C4-S4
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,2080-IF4 - PLC AI 4 CH.,5000-1705,2080-IF4 - PLC AI 4 CH.,,1/30/2024,,6,154.82,$929 ,R5-2-3
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,2711R-T7T,8985-3222,"HMI 7"" PANELVIEW",,1/30/2024,,1,611.02,$611 ,CR-C4-S2
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,"1585J-M8CBJM-1 - ETHERNET CABLE 1m, AB#1",,"1585J-M8CBJM-1 - ETHERNET CABLE 1m, AB#1",,9/20/2022,,6,22.17,$133 ,CR-C4-S4
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,"800H-QRT24R - PILOT LIGHT, AB# 800H-QRT2",,"800H-QRT24R - PILOT LIGHT, AB# 800H-QRT2",,9/20/2022,,4,80.53,$322 ,CR-C3-S5
+1068497    ENGLEWOOD ELECTRICAL SUPPLY,Electrical,UUMH2 - HOFF UUMH2 MTG HARDWARE (10) SCR,,UUMH2 - HOFF UUMH2 MTG HARDWARE (10) SCR,,9/20/2022,,6,26,$156 ,CR-C4-S4
+AB,,25B-D024N104,,15HP POWERFLEX 525 DRIVE,,9/22/2022,,3,"1,754.00","$5,262 ",CR-C3-S1
+AB,,1794-IB16,,,,10/19/2023,,1,$322 ,$322 ,R6-4-2
+AB,,1794-IE8,,,,10/19/2023,,2,"$1,020 ","$2,041 ",R6-4-2
+AB,,1734-TOP SER A,,,,10/17/2022,,93,18.67,"$1,736 ",CR-C3-S4
+AB,,20F11ND022JA0NNNNN,,AC DRIVE INPUT 480VAC 22(14) OUTPUT 15HP(10HP),BURNS&MACC,12/19/2022,,1,"$2,669 ","$2,669 ",CR-C5-S2
+AB,,1756-A10,,,,12/19/2022,,1,$726 ,$726 ,CR-C5-S2
+AB,,1494U-PC2,,,,12/19/2022,,1,$102 ,$102 ,CR-C5-S2
+AB,,1494U-PC1,,,,12/19/2022,,1,80.56,$81 ,CR-C5-S2
+BURKERT,Electrical,565159,,PANEL VIEW IP-20,,12/19/2022,,1,, $-   ,CR-C5-S2
+AB,,1494U-D60,,,,12/19/2022,,1,$296 ,$296 ,CR-C5-S2
+AB,,1494U-D100,,,,12/19/2022,,1,$447 ,$447 ,CR-C5-S2
+AB,,1756-PB72,,,,12/19/2022,,1,"$1,072 ","$1,072 ",CR-C5-S2
+HUBBELL,Electrical,HBLDS3SSR,,"Circuit-Lock Switch, Enclosed Disconnect; 600V AC; 3 Pole; 5 Wire; 30A",,12/19/2022,,1,"$1,015 ","$1,015 ",CR-C5-S2
+AB,,20AD014A0AYNANNN,,20A,,12/21/2022,,1, Bad Part? , $-   ,CR-C5-S1
+AB,,1756-A17,,,,12/21/2022,,1,"$1,025 ","$1,025 ",CR-C5-S1
+AB,,1494V-RA4,,,,12/21/2022,,1,$54 ,$54 ,CR-C5-S1
+AB,,1494-DS30,,,,12/21/2022,,1, Bad Part? , $-   ,CR-C5-S1
+AB,,1497A-A9-M7-3-N,,CONTROL TRANSFORMER,,12/22/2022,,1,$336 ,$336 ,CR-C5-S4
+AB,,1494U-J60-C3-PC-S,,,,1/19/2023,,1,$683 ,$683 ,CR-C6-S1
+AB,,25B-D010N104,,,,3/13/2023,,2,"$1,380 ","$2,760 ",CR-C4-S4
+AB,,25B-D010N114,,,,3/13/2023,,1,"$1,380 ","$1,380 ",CR-C4-S4
+AB,,5094-AENTRXT,,,,8/9/2023,,2,"$1,021 ","$2,043 ",CR-C4-S4
+AB,,194R-SDK2,,,,8/9/2023,,2,$104 ,$207 ,CR-C4-S6
+IFM,Electrical,AL1940,,,,8/9/2023,,10,$410 ,"$4,104 ",CR-C4-S6
+AB,,1794-OW8,,,,10/19/2023,,1,$370 ,$370 ,R6-4-2
+Goulds,Mechanical,11B0000803,8-digit,BLADER TANK PRO 2.1 GALL 3/4 NPT 150PSI P36PSI,,4/26/2023,,2,, $-   ,CR-C6-S6
+AB,,2711P-T10C21D8S,,PANELVIEW PLUS 7,,9/11/2023,,1,"$2,874 ","$2,874 ",CR-C4-S2
+AB,,194R-SDK2,,,,11/1/2023,,1,$104 ,$104 ,R6-7-1
+AB,,1585-M8CBJM-1,,,,11/1/2023,,2, Bad Part? , $-   ,R7-1-1
+AB,,1734-IE8C  SER C,,,,11/1/2023,,7,$989 ,"$6,922 ",R7-3-3
+AB,,1734-OB8E,,,,11/1/2023,,4,$185 ,$738 ,R7-3-3
+AB,,1734-OE4C   SER C,,,,11/1/2023,,4,$601 ,"$2,403 ",R7-3-3
+AB,,194E-A25-1753-6N,,,,11/1/2023,,1,$114 ,$114 ,R5-4-2
+AB,,1734-FPD,,,,11/1/2023,,9,$116 ,"$1,043 ",R5-1-1
+IFM,Electrical,AL1122,,IO LINK MASTER,,11/1/2023,,1,$314 ,$314 ,R5-5-2
+AB,,2080-LC20-20QBB,,,,11/1/2023,,1,$364 ,$364 ,R1-2-5
+BUSSMANN,Electrical,PDBFS220,,,,11/1/2023,,1,$48 ,$48 ,R1-5-5
+AB,,1794-TB3,,,,11/1/2023,,12,$203 ,"$2,439 ",R5-1-2
+AB,,1585D-M4UBJM-0M6,,,,11/1/2023,,2,$46 ,$92 ,R7-1-1
+AB,,1585D -M4UBJM-1,,,,11/1/2023,,5, Bad Part? , $-   ,R7-1-1
+AB,,5069-FPD,,,,11/1/2023,,1,$157 ,$157 ,R5-1-1
+AB,,1756-OF8IH,,ANALOG OUTPUT,,11/13/2023,,1,"$4,089 ","$4,089 ",R6-5-2
+AB,,1756-DHRIO,,,,11/13/2023,,1,"$3,963 ","$3,963 ",R6-5-2
+ANDERSON,Mechanical,SR075G00501100,,PRESSURE TRANSMITTER,,11/1/2023,,1,, $-   ,R6-7-1
+AB,,1756-OF8,,,,11/28/2023,,1,"$2,407 ","$2,407 ",R2-6-3
+PRECISION DIGITAL,Electrical,PD603-6R0-1,,,,12/28/2023,,3,, $-   ,CR-C5-S5
+AB,,1756-IB32,,,,11/28/2023,,1,$562 ,$562 ,R2-6-3
+AB,,1756-IF8H,,,,11/28/2023,,1,"$1,787 ","$1,787 ",R2-6-3
+AB,,5069-IF8,,,,11/2/2022,,4,$856 ,"$3,424 ",CR-C4-S5
+AB,,5069-FPD,,,,11/2/2022,,11,$155 ,"$1,705 ",CR-C4-S5
+AB,,5069-OW16,,,,11/2/2022,,5,$691 ,"$3,455 ",CR-C4-S5
+AB,,5069-OF4,,,,11/2/2022,,1,$821 ,$821 ,CR-C4-S5
+AB,,5069-IB16,,,,11/2/2022,,3,$260 ,$780 ,CR-C4-S5
+AB,,800T-XA4 ,,,,11/2/2022,,10,$23 ,$233 ,R4-3-2
+AB,,1794-IE8,,,,11/2/2022,,4,"$1,020 ","$4,081 ",R4-3-2
+AB,,1492-SPM1C200  SER D,,,,11/2/2022,,3,$30 ,$89 ,R4-3-2
+AB,,5069-RTB64-SCREW,,,,11/2/2022,,2,$34 ,$68 ,R4-3-2
+AB,,5069-RTB18-SCREW,,,,11/2/2022,,11,$61 ,$671 ,R4-3-2
+ANDERSON,Mechanical,EH2108093,,DA2 TRANSMITTER,,11/2/2022,,1,, $-   ,CR-C4-S3
+AB,,1794-TB3,,,,11/2/2022,,13,$203 ,"$2,642 ",CR-C4-S3
+AB,,5069-AENTR,,,,11/2/2022,,2,$874 ,"$1,748 ",CR-C4-S3
+BURKERT,Electrical,2000 A 9/16 PTFE SS NPT1/2PS 232PSI PST 59-145PSI,,,,11/2/2022,,5,, $-   ,CR-C4-S3
+AB,,800H-FRXTQH2RA1,8390-1008,,,11/2/2022,,2,$143 ,$286 ,R4-4-2
+AB,,5069-RTB6-SCREW,,,,11/2/2022,,1,$21 ,$21 ,R4-3-2
+AB,,440R-S13R2,,,,11/6/2023,,1,"$2,682 ","$2,682 ",R3-5-2
+AB,,5069-OW16,,,,11/2/2022,,3,$691 ,"$2,073 ",CR-C4-S5
+AB,,5069-AENTR,,,,11/2/2022,,6,$874 ,"$5,244 ",CR-C4-S3
+AB,,5069-IF8,,,,11/2/2022,,9,$856 ,"$7,704 ",CR-C4-S5
+,,EX2 ULTRA 0TB,,MY CLOUD,,11/2/2022,,2, Bad Part? , $-   ,CR-C3-S3
+AB,,800H-FRXTQH2RA1,8390-1008,,,11/2/2022,,5,$143 ,$716 ,R4-4-1
+AB,,1794-IE8,,,,11/2/2022,,4,"$1,020 ","$4,081 ",R4-4-2
+,,AE10517-ND,,CABLE  DK-1611-001/B,,11/2/2022,,9, Bad Part? , $-   ,R3-4-3
+JOHN G,Mechanical,PI061208S,,REDUCER 3/8-1/4,,11/2/2022,,30,, $-   ,R3-3-3
+JOHN G,Mechanical,PI211612S,,ELBOW 1/2-3/8,,11/2/2022,,30,, $-   ,R3-3-3
+JOHN G,Mechanical,PI301612S,,T,,11/2/2022,,30,, $-   ,R3-3-3
+HUBBELL,Electrical,HBLDS6AC,,"Circuit-Lock Switch, Rotary Disconnect; 600V AC; 3 Pole; 3 Wire; 60A",,12/14/2022,,1,$688 ,$688 ,CR-C5-S4
+AB,,1606-XLE240E-3,,POWER SUPPLY,,11/1/2023,,1,$228 ,$228 ,CR-C3-S5
+HOFFMAN,Electrical,UU606030,5000-1557,"24""x24""x12"" FG ENCLOSURE NO CUTS ",,3/14/2023,,11,$638 ,"$7,021 ",F&B SHOP
+AB,,194R-PY,,"RED/YLW PADLOCK HANDLE, (1) MISSING SCREW KIT",,C,,2,$32 ,$64 ,R1-4-3
+ VNE CORPORATION,Mechanical,EG14WL-6L3.0,,"3.0"" FERRULE 316SS",,4/30/2024,,18,, $-   ,CR-C7-S1
+VNE CORPORATION,Mechanical,EG14WL-6L2.5,,2.5 FERRULE 316 SS,,4/30/2024,,29,, $-   ,CR-C7-S1
+INLINE INDUSTRIES,Mechanical,33F-C3333-MMOO-2S,,"    1-1/2"" Sanitary BV 316L",,4/30/2024,,3,, $-   ,CR-C7-S1
+,,"1-1/2"" SS 316L ",,Threaded Elbow,,4/30/2024,,2,, $-   ,CR-C7-S1
+,,"2"" SS 316L",,Threaded Elbow,,4/30/2024,,2,, $-   ,CR-C7-S1
+HAYWARD,Mechanical,BFAS1020CES,,"2"" BULKHEAD PVC",,4/30/2024,,1,, $-   ,CR-C7-S1
+HAYWARD,Mechanical,BFAS1015CES,,"1-1/2"" BULKHEAD PVC",,4/30/2024,,1,, $-   ,CR-C7-S1
+HAYWARD,Mechanical,BFAS1010CES,,"1"" BULKHEAD PVC",,4/30/2024,,1,, $-   ,CR-C7-S1
+ALFA LAVAL,Mechanical,9613361084,,"UNIQUE SSV, 7610111SM2H301SRSSESNNN",,5/1/2024,,5,, $-   ,F&B Rack
+ALFA LAVAL,Mechanical,9634101045,,"UNIQUE RV-ST, 7711200SM2H201SRSLE8NNN",,5/1/2024,,1,, $-   ,F&B Rack
+ALFA LAVAL,Mechanical,9613361082,,"UNIQUE SSV, 7610111SM2H201SRSSESNNN",,5/1/2024,,1,, $-   ,F&B Rack
+ALFA LAVAL,Mechanical,9613361002,,"UNIQUE SSV, 7610200SM2H202SRSSESNNN",,5/1/2024,,2,, $-   ,F&B Rack
+BURKERT,Electrical,368306,,"8802-GD-I-A-80,0SS-VA-FA09-P-0-E-0-I-0-0",,5/1/2024,,4,, $-   ,F&B Rack
+AMPCO,Mechanical,AL30-SF02-SS,,"SHAFT, 33, SHORT, SS AL",,5/1/2024,,2,, $-   ,F&B Rack
+AMPCO,Mechanical,AL30-SP01-SS-04,,"SHIM, 33/34, 0.004"", AL",,5/1/2024,,2,, $-   ,F&B Rack
+OPTEK,Electrical,3405-0011-1122-05,,"SENSOR, AS56-N OPLO5-40",,5/1/2024,,2,, $-   ,F&B Rack
+OPTEK,Electrical,,,"SENSOR ADAPTOR, AS25-G60",,5/1/2024,,2,, $-   ,F&B Rack
+OPTEK,Electrical,1201-3401-0001-00,,SENSOR INSTALLATION KIT- A5,,5/1/2024,,2,, $-   ,F&B Rack
+GRUNDFOS,Mechanical,A-GJ-A-V-HQQV,,"PUMP, 5HP, 3X208-230/460V 60HZ, IP55",,5/1/2024,,1,, $-   ,F&B Rack
+GRUNDFOS,Mechanical,99164187,,Pump DD 120-7 FCM,,5/3/2024,,1,, $-   ,CR-C6-S1
+AB,,1783-US8T,,,,5/3/2024,,2,, $-   ,CR-C6-S5
+AB,,1494U-HS1,,,,5/3/2024,,1,, $-   ,CR-C6-S5
+AB,,1756-PA75   SER B,,,,5/3/2024,,1,, $-   ,CR-C6-S6
+PULS,Electrical,1736-1019-ND,,"POWER SUPPLY INPUT,3AC 380-480 V, OUTPUT, DC 24-28, 20A",,5/3/2024,,1,, $-   ,CR-C6-S5
+AB,,1756-TBCH/A,,,,5/3/2024,,1,, $-   ,CR-C6-S5
+IFM,Electrical,US0043,,,,5/3/2024,,3,, $-   ,CR-C6-S5
+IFM,Electrical,E40228,,,,5/3/2024,,1,, $-   ,CR-C6-S5
+OHM-RANGER,Electrical,3420,,OHM-RANGER,,5/3/2024,,1,, $-   ,CR-C6-S5
+AB,,1756-A7,,,,5/3/2024,,1,, $-   ,CR-C6-S6
+,,,,,,,,,, $-   ,

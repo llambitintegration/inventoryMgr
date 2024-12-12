@@ -1,0 +1,385 @@
+# Inventory Management System Requirements
+
+## Overview
+Create a robust inventory management system that integrates CSV data parsing, PostgreSQL database management, barcode scanning via Ignition 8's Perspective module, and intelligent part lookup capabilities.
+
+## 1. Database Schema
+
+```sql
+-- Core Tables
+CREATE TYPE component_type AS ENUM ('Mechanical', 'Electrical');
+
+CREATE TABLE suppliers (
+    supplier_id SERIAL PRIMARY KEY,
+    supplier_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE locations (
+    location_id SERIAL PRIMARY KEY,
+    location_code VARCHAR(50) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE components (
+    component_id SERIAL PRIMARY KEY,
+    supplier_id INTEGER REFERENCES suppliers(supplier_id),
+    owner component_type NOT NULL,
+    supplier_part_number VARCHAR(100),
+    ecolab_part_number VARCHAR(8),  -- 8-digit internal tracking
+    description TEXT,
+    current_quantity INTEGER NOT NULL DEFAULT 0,
+    minimum_quantity INTEGER DEFAULT 0,
+    location_id INTEGER REFERENCES locations(location_id),
+    unit_price DECIMAL(10,2),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT unique_supplier_part UNIQUE (supplier_id, supplier_part_number)
+);
+
+-- Transaction History
+CREATE TABLE inventory_transactions (
+    transaction_id SERIAL PRIMARY KEY,
+    component_id INTEGER REFERENCES components(component_id),
+    transaction_type VARCHAR(20) CHECK (transaction_type IN ('IN', 'OUT', 'ADJUST')),
+    quantity INTEGER NOT NULL,
+    previous_quantity INTEGER NOT NULL,
+    new_quantity INTEGER NOT NULL,
+    transaction_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    user_id VARCHAR(50) NOT NULL,
+    barcode_scanned BOOLEAN DEFAULT FALSE,
+    notes TEXT
+);
+
+-- Barcode Mapping
+CREATE TABLE barcode_mappings (
+    barcode_id VARCHAR(100) PRIMARY KEY,
+    component_id INTEGER REFERENCES components(component_id),
+    barcode_type VARCHAR(50),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Part Details Cache
+CREATE TABLE part_details_cache (
+    cache_id SERIAL PRIMARY KEY,
+    component_id INTEGER REFERENCES components(component_id),
+    manufacturer VARCHAR(255),
+    manufacturer_part_number VARCHAR(100),
+    specifications JSONB,
+    datasheet_url TEXT,
+    last_updated TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create indexes for improved performance
+CREATE INDEX idx_components_supplier_part ON components(supplier_part_number);
+CREATE INDEX idx_components_ecolab_part ON components(ecolab_part_number);
+CREATE INDEX idx_inventory_transactions_component ON inventory_transactions(component_id);
+CREATE INDEX idx_inventory_transactions_date ON inventory_transactions(transaction_date);
+```
+
+## 2. CSV Import Process
+
+```python
+import pandas as pd
+import psycopg2
+from psycopg2.extras import execute_batch
+from datetime import datetime
+import numpy as np
+
+def clean_and_validate_data(df):
+    """
+    Clean and validate CSV data before import
+    """
+    # Strip whitespace
+    for col in df.select_dtypes(['object']).columns:
+        df[col] = df[col].str.strip()
+    
+    # Convert quantity to integer
+    df['QTY'] = pd.to_numeric(df['QTY'], errors='coerce').fillna(0).astype(int)
+    
+    # Clean price columns
+    df[' NET PRICE '] = df[' NET PRICE '].str.replace('$', '').str.replace(',', '').astype(float)
+    
+    # Standardize Mechanical/Electrical field
+    df['Mechanical/Electrical'] = df['Mechanical/Electrical'].map({
+        'Mechanical': 'Mechanical',
+        'M': 'Mechanical',
+        'Electrical': 'Electrical',
+        'E': 'Electrical'
+    })
+    
+    return df
+
+def import_to_database(df, conn):
+    """
+    Import cleaned data to PostgreSQL
+    """
+    cur = conn.cursor()
+    
+    # First, process suppliers
+    suppliers = df['SUPPLIER'].unique()
+    supplier_mapping = {}
+    
+    for supplier in suppliers:
+        cur.execute(
+            "INSERT INTO suppliers (supplier_name) VALUES (%s) ON CONFLICT (supplier_name) DO UPDATE SET updated_at = CURRENT_TIMESTAMP RETURNING supplier_id",
+            (supplier,)
+        )
+        supplier_mapping[supplier] = cur.fetchone()[0]
+    
+    # Then process locations
+    locations = df['LOCATION'].unique()
+    location_mapping = {}
+    
+    for location in locations:
+        cur.execute(
+            "INSERT INTO locations (location_code) VALUES (%s) ON CONFLICT (location_code) DO UPDATE SET updated_at = CURRENT_TIMESTAMP RETURNING location_id",
+            (location,)
+        )
+        location_mapping[location] = cur.fetchone()[0]
+    
+    # Finally, process components
+    component_data = []
+    for _, row in df.iterrows():
+        component_data.append((
+            supplier_mapping[row['SUPPLIER']],
+            row['Mechanical/Electrical'],
+            row['SUPPLIER PART#'],
+            row['8-DIGIT'],
+            row['DESCRIPTION'],
+            row['QTY'],
+            location_mapping[row['LOCATION']],
+            row[' NET PRICE ']
+        ))
+    
+    execute_batch(cur, """
+        INSERT INTO components 
+        (supplier_id, owner, supplier_part_number, ecolab_part_number, 
+         description, current_quantity, location_id, unit_price)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (supplier_id, supplier_part_number) 
+        DO UPDATE SET 
+            current_quantity = EXCLUDED.current_quantity,
+            updated_at = CURRENT_TIMESTAMP
+    """, component_data)
+    
+    conn.commit()
+```
+
+## 3. Ignition Perspective Integration
+
+```python
+# Jython script for Ignition 8 Perspective
+from com.inductiveautomation.ignition.common.script.builtin import DatasetUtilities
+from java.util import Date
+from java.text import SimpleDateFormat
+
+def handleBarcodeScan(barcode, event):
+    """
+    Handle barcode scan event in Perspective
+    """
+    try:
+        # Query the database for the component
+        query = """
+            SELECT c.*, s.supplier_name, l.location_code 
+            FROM components c
+            JOIN suppliers s ON c.supplier_id = s.supplier_id
+            JOIN locations l ON c.location_id = l.location_id
+            JOIN barcode_mappings b ON c.component_id = b.component_id
+            WHERE b.barcode_id = ?
+        """
+        
+        results = system.db.runPrepQuery(query, [barcode])
+        
+        if not results.getRowCount():
+            return {"success": False, "message": "Barcode not found"}
+            
+        componentData = {
+            "componentId": results.getValueAt(0, "component_id"),
+            "supplierName": results.getValueAt(0, "supplier_name"),
+            "partNumber": results.getValueAt(0, "supplier_part_number"),
+            "description": results.getValueAt(0, "description"),
+            "quantity": results.getValueAt(0, "current_quantity"),
+            "location": results.getValueAt(0, "location_code")
+        }
+        
+        return {"success": True, "data": componentData}
+        
+    except Exception as e:
+        return {"success": False, "message": str(e)}
+
+def updateInventory(componentId, quantity, transactionType, userId):
+    """
+    Update inventory levels
+    """
+    try:
+        # Start transaction
+        system.db.beginTransaction()
+        
+        # Get current quantity
+        query = "SELECT current_quantity FROM components WHERE component_id = ?"
+        result = system.db.runPrepQuery(query, [componentId])
+        currentQty = result.getValueAt(0, 0)
+        
+        # Calculate new quantity
+        if transactionType == "IN":
+            newQty = currentQty + quantity
+        elif transactionType == "OUT":
+            if currentQty < quantity:
+                raise ValueError("Insufficient quantity")
+            newQty = currentQty - quantity
+        else:
+            newQty = quantity
+        
+        # Update component quantity
+        system.db.runPrepUpdate(
+            "UPDATE components SET current_quantity = ?, updated_at = NOW() WHERE component_id = ?",
+            [newQty, componentId]
+        )
+        
+        # Record transaction
+        system.db.runPrepUpdate(
+            """INSERT INTO inventory_transactions 
+               (component_id, transaction_type, quantity, previous_quantity, new_quantity, user_id, barcode_scanned)
+               VALUES (?, ?, ?, ?, ?, ?, true)""",
+            [componentId, transactionType, quantity, currentQty, newQty, userId]
+        )
+        
+        # Commit transaction
+        system.db.commitTransaction()
+        
+        return {"success": True, "newQuantity": newQty}
+        
+    except Exception as e:
+        system.db.rollbackTransaction()
+        return {"success": False, "message": str(e)}
+```
+
+## 4. Part Lookup Integration
+
+```python
+import requests
+from typing import Optional, Dict, Any
+import json
+
+class PartLookupService:
+    def __init__(self, openai_api_key: str):
+        self.api_key = openai_api_key
+        self.base_url = "https://api.openai.com/v1"
+        
+    def search_part_details(self, 
+                          part_number: str, 
+                          manufacturer: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Search for part details using OpenAI's API
+        """
+        # Construct the prompt
+        prompt = f"Find detailed information about electronic/mechanical component: {part_number}"
+        if manufacturer:
+            prompt += f" manufactured by {manufacturer}"
+            
+        try:
+            response = requests.post(
+                f"{self.base_url}/completions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "gpt-4",
+                    "messages": [{
+                        "role": "user",
+                        "content": prompt
+                    }],
+                    "temperature": 0.7,
+                    "max_tokens": 500
+                }
+            )
+            
+            if response.status_code == 200:
+                # Parse the response and extract relevant information
+                result = response.json()
+                parsed_info = self._parse_component_info(result['choices'][0]['message']['content'])
+                return parsed_info
+            else:
+                raise Exception(f"API request failed: {response.status_code}")
+                
+        except Exception as e:
+            print(f"Error in part lookup: {str(e)}")
+            return None
+            
+    def _parse_component_info(self, response_text: str) -> Dict[str, Any]:
+        """
+        Parse the AI response into structured component information
+        """
+        try:
+            # Use OpenAI to help structure the response
+            structure_prompt = f"Parse this component information into JSON: {response_text}"
+            
+            response = requests.post(
+                f"{self.base_url}/completions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "gpt-4",
+                    "messages": [{
+                        "role": "user",
+                        "content": structure_prompt
+                    }],
+                    "temperature": 0.3,
+                    "max_tokens": 500
+                }
+            )
+            
+            if response.status_code == 200:
+                structured_info = response.json()['choices'][0]['message']['content']
+                return json.loads(structured_info)
+            else:
+                raise Exception("Failed to structure component information")
+                
+        except Exception as e:
+            print(f"Error parsing component info: {str(e)}")
+            return None
+
+    def update_cache(self, component_id: int, details: Dict[str, Any]) -> bool:
+        """
+        Update the part details cache in the database
+        """
+        try:
+            conn = psycopg2.connect("your_connection_string")
+            cur = conn.cursor()
+            
+            cur.execute("""
+                INSERT INTO part_details_cache 
+                (component_id, manufacturer, manufacturer_part_number, specifications, datasheet_url)
+                VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (component_id) 
+                DO UPDATE SET 
+                    manufacturer = EXCLUDED.manufacturer,
+                    manufacturer_part_number = EXCLUDED.manufacturer_part_number,
+                    specifications = EXCLUDED.specifications,
+                    datasheet_url = EXCLUDED.datasheet_url,
+                    last_updated = CURRENT_TIMESTAMP
+            """, (
+                component_id,
+                details.get('manufacturer'),
+                details.get('manufacturer_part_number'),
+                json.dumps(details.get('specifications', {})),
+                details.get('datasheet_url')
+            ))
+            
+            conn.commit()
+            return True
+            
+        except Exception as e:
+            print(f"Error updating cache: {str(e)}")
+            return False
+            
+        finally:
+            if conn:
