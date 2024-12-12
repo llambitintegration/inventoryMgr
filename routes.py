@@ -24,24 +24,29 @@ def inventory():
 def import_csv():
     if request.method == 'POST':
         if 'file' not in request.files:
-            flash('No file uploaded', 'error')
-            return redirect(request.url)
+            return jsonify({'error': 'No file uploaded'}), 400
             
         file = request.files['file']
         if file.filename == '':
-            flash('No file selected', 'error')
-            return redirect(request.url)
+            return jsonify({'error': 'No file selected'}), 400
             
         try:
             results = process_csv_file(file)
-            flash(f'Successfully imported {results["success"]} records. {results["errors"]} errors.', 'success')
+            return jsonify({
+                'success': True,
+                'message': f'Successfully imported {results["success"]} records. {results["errors"]} errors.'
+            })
         except Exception as e:
             logger.error(f"Error importing CSV: {str(e)}")
-            flash(f'Error importing file: {str(e)}', 'error')
-            
-        return redirect(url_for('inventory.inventory'))
+            return jsonify({'error': str(e)}), 500
         
     return render_template('import.html')
+
+@inventory_bp.route('/api/import/status')
+def import_status():
+    """Get the current import status"""
+    from utils.csv_import import get_import_status
+    return jsonify(get_import_status())
 
 @inventory_bp.route('/transactions')
 def transactions():

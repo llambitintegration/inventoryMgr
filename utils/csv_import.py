@@ -4,25 +4,59 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+import threading
+
+# Global variable to track import progress
+current_import_status = {
+    'total_rows': 0,
+    'current_row': 0,
+    'status': 'idle',
+    'message': ''
+}
+
+def get_import_status():
+    """Get the current import status"""
+    return current_import_status
+
 def process_csv_file(file):
     """Process and validate CSV file for import"""
+    global current_import_status
     try:
+        current_import_status['status'] = 'reading'
+        current_import_status['message'] = 'Reading CSV file...'
+        
         df = pd.read_csv(file)
+        total_rows = len(df)
+        current_import_status.update({
+            'total_rows': total_rows,
+            'current_row': 0,
+            'status': 'processing'
+        })
+        
         success_count = 0
         error_count = 0
         
         # Clean and validate data
+        current_import_status['message'] = 'Cleaning and validating data...'
         df = clean_data(df)
         
         # Process suppliers
+        current_import_status['message'] = 'Processing suppliers...'
         suppliers = process_suppliers(df)
         
         # Process locations
+        current_import_status['message'] = 'Processing locations...'
         locations = process_locations(df)
         
         # Process components
-        for _, row in df.iterrows():
+        current_import_status['message'] = 'Processing components...'
+        for index, row in df.iterrows():
             try:
+                current_import_status.update({
+                    'current_row': index + 1,
+                    'message': f'Processing row {index + 1} of {total_rows}'
+                })
+                
                 supplier = suppliers.get(row['SUPPLIER'])
                 location = locations.get(row['LOCATION'])
                 
