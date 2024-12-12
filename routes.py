@@ -1,12 +1,7 @@
-from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
-from models import db, Component, Supplier, Location, InventoryTransaction
 from datetime import datetime, timedelta
-import logging
-
-logger = logging.getLogger(__name__)
-
-inventory_bp = Blueprint('inventory', __name__)
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
+from sqlalchemy import func, case, text
+from sqlalchemy.exc import SQLAlchemyError
 from models import db, Component, Supplier, Location, InventoryTransaction
 from utils.csv_import import process_csv_file
 import logging
@@ -97,35 +92,11 @@ def update_inventory():
 
 @inventory_bp.route('/api/inventory/search', methods=['GET'])
 def search_inventory():
-    """Search inventory components across multiple fields."""
     try:
-        # Enhanced debugging
-        logger.info("\n=== Search Request Started ===")
-        logger.info(f"Request Method: {request.method}")
-        logger.info(f"Request URL: {request.url}")
-        logger.info(f"Request Args: {request.args}")
-        logger.info(f"Request Headers: {dict(request.headers)}")
-        logger.info(f"Raw Query Param: {request.args.get('q', '')}")
-        
         search_term = request.args.get('q', '').strip()
-        logger.info(f"Processed search term: '{search_term}'")
-        
         if not search_term:
-            logger.info("Empty search term, returning empty results")
             return jsonify([])
 
-        # Database connection check
-        try:
-            db.session.execute(db.select(db.text('1'))).scalar()
-            component_count = Component.query.count()
-            supplier_count = Supplier.query.count()
-            location_count = Location.query.count()
-            logger.info(f"Database status - Components: {component_count}, Suppliers: {supplier_count}, Locations: {location_count}")
-        except SQLAlchemyError as db_error:
-            logger.error(f"Database connection error: {str(db_error)}")
-            return jsonify({'error': 'Database connection error'}), 500
-        
-        # Build search query
         query = Component.query\
             .join(Supplier)\
             .join(Location)\
@@ -139,177 +110,125 @@ def search_inventory():
                 )
             )
         
-        # Log the SQL query
-        sql = str(query.statement.compile(compile_kwargs={"literal_binds": True}))
-        logger.info(f"Executing SQL query:\n{sql}")
+        results = query.limit(10).all()
         
-        # Execute query with debugging
-        try:
-            results = query.limit(10).all()
-            logger.info(f"Query executed successfully, found {len(results)} results")
-        except Exception as query_error:
-            logger.error(f"Query execution error: {str(query_error)}")
-            return jsonify({'error': 'Error executing search query'}), 500
+        formatted_results = [{
+            'id': c.component_id,
+            'part_number': c.supplier_part_number,
+            'description': c.description,
+            'supplier': c.supplier.supplier_name,
+            'location': c.location.location_code,
+            'quantity': c.current_quantity,
+            'type': c.owner
+        } for c in results]
         
-        # Format results with detailed logging
-        try:
-            formatted_results = []
-            for c in results:
-                result = {
-                    'id': c.component_id,
-                    'part_number': c.supplier_part_number,
-                    'description': c.description,
-                    'supplier': c.supplier.supplier_name,
-                    'location': c.location.location_code,
-                    'quantity': c.current_quantity,
-                    'type': c.owner
-                }
-                formatted_results.append(result)
-                logger.debug(f"Formatted result: {result}")
+        return jsonify(formatted_results)
             
-            logger.info(f"Successfully formatted {len(formatted_results)} results")
-            logger.info("=== Search Request Completed Successfully ===")
-            return jsonify(formatted_results)
-            
-        except Exception as format_error:
-            logger.error(f"Error formatting results: {str(format_error)}")
-            return jsonify({'error': 'Error formatting search results'}), 500
-
     except Exception as e:
-        logger.error("=== Search Request Failed ===")
-        logger.error(f"Unhandled error in search: {str(e)}", exc_info=True)
+        logger.error(f"Error in search: {str(e)}", exc_info=True)
         return jsonify({'error': str(e)}), 500
+
 @inventory_bp.route('/reports')
 def reports():
-    # Get low stock items
-    low_stock = Component.query.filter(
-        Component.current_quantity <= Component.minimum_quantity
-    ).all()
-    
-    # Get transaction summary
-    transactions = InventoryTransaction.query.order_by(
-        InventoryTransaction.transaction_date.desc()
-    ).limit(10).all()
-    
-    # Calculate summary metrics
-    total_items = Component.query.count()
-    total_value = db.session.query(
-        db.func.sum(Component.current_quantity * Component.unit_price)
-    ).scalar() or 0
-    supplier_count = Supplier.query.count()
-    
-    # Get category value data
-    category_values = db.session.query(
-        Component.owner,
-        db.func.sum(Component.current_quantity * Component.unit_price).label('value')
-    ).group_by(Component.owner).all()
-    
-    category_value_data = {
-        'labels': [category[0] for category in category_values],
-        'datasets': [{
-            'data': [float(category[1] or 0) for category in category_values],
-            'backgroundColor': ['#198754', '#0d6efd']
-        }]
-    }
-    
-    # Get stock movement trend for the last 30 days
-    thirty_days_ago = datetime.utcnow() - timedelta(days=30)
-    
-    # Create a series of dates
-    dates = []
-    current = thirty_days_ago
-    while current <= datetime.utcnow():
-        dates.append(current.date())
-        current += timedelta(days=1)
-
-    # Query transactions
-    stock_movement = db.session.query(
-        db.func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
-        db.func.sum(db.case(
-            (InventoryTransaction.transaction_type == 'IN', InventoryTransaction.quantity),
-            (InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity),
-            else_=0
-        )).label('net_change')
-    ).filter(
-        InventoryTransaction.transaction_date >= thirty_days_ago
-    ).group_by(
-        'date'
-    ).order_by('date').all()
-    
-    # Create a dictionary of date to net change
-    movement_dict = {movement.date.date(): movement.net_change or 0 for movement in stock_movement}
-    
-    # Fill in missing dates with zero
-    complete_movement = [(date, movement_dict.get(date, 0)) for date in dates]
-    
-    stock_movement_data = {
-        'labels': [date.strftime('%Y-%m-%d') for date, _ in complete_movement],
-        'datasets': [{
-            'label': 'Net Stock Change',
-            'data': [int(change) for _, change in complete_movement],
-            'borderColor': '#0d6efd',
-            'backgroundColor': 'rgba(13, 110, 253, 0.1)',
-            'tension': 0.1,
-            'fill': True
-        }]
-    }
-    
-    # Add debug logging
-    logger.debug(f"Stock movement dates: {[date.strftime('%Y-%m-%d') for date, _ in complete_movement]}")
-    logger.debug(f"Stock movement values: {[int(change) for _, change in complete_movement]}")
-    
-    # Add debug logging
-    logger.debug(f"Category Value Data: {category_value_data}")
-    logger.debug(f"Stock Movement Data: {stock_movement_data}")
-    
-    return render_template('reports.html',
-                         low_stock=low_stock,
-                         recent_transactions=transactions,
-                         total_items=total_items,
-                         total_value=total_value,
-                         supplier_count=supplier_count,
-                         category_value_data=category_value_data,
-                         stock_movement_data=stock_movement_data)
-
-@inventory_bp.route('/api/inventory/component/<part_number>')
-def get_component_details(part_number):
     try:
-        component = Component.query.join(Supplier).join(Location).filter(
-            Component.supplier_part_number == part_number
-        ).first()
+        # Get summary metrics
+        total_items = Component.query.count()
+        total_value = db.session.query(
+            func.sum(Component.current_quantity * Component.unit_price)
+        ).scalar() or 0.0
         
-        if not component:
-            return jsonify({'error': 'Component not found'}), 404
-            
+        # Get low stock items
+        low_stock = Component.query.filter(
+            Component.current_quantity <= Component.minimum_quantity
+        ).all()
+        
+        # Get supplier count
+        supplier_count = Supplier.query.count()
+        
+        # Get category value data with proper type conversion and null handling
+        category_values = db.session.query(
+            Component.owner.label('category'),
+            func.coalesce(func.sum(
+                Component.current_quantity * Component.unit_price
+            ), 0.0).label('value')
+        ).group_by(Component.owner).all()
+        
+        # Convert Decimal to float for JSON serialization with safe defaults
+        category_value_data = {
+            'labels': [str(category.category or 'Uncategorized') for category in category_values],
+            'datasets': [{
+                'data': [float(category.value or 0.0) for category in category_values],
+                'backgroundColor': ['#198754', '#0d6efd', '#dc3545', '#ffc107'][:len(category_values)],
+                'borderWidth': 1,
+                'borderColor': '#343a40'
+            }]
+        }
+        
+        # Log the data for debugging
+        logger.debug(f"Category values query result: {category_values}")
+        logger.debug(f"Formatted category value data: {category_value_data}")
+        
         # Get recent transactions
-        transactions = InventoryTransaction.query.filter_by(
-            component_id=component.component_id
-        ).order_by(
-            InventoryTransaction.transaction_date.desc()
-        ).limit(5).all()
+        recent_transactions = InventoryTransaction.query\
+            .join(Component)\
+            .order_by(InventoryTransaction.transaction_date.desc())\
+            .limit(10).all()
         
-        return jsonify({
-            'component': {
-                'component_id': component.component_id,
-                'supplier_part_number': component.supplier_part_number,
-                'description': component.description,
-                'supplier_name': component.supplier.supplier_name,
-                'current_quantity': component.current_quantity,
-                'location_code': component.location.location_code,
-                'owner': component.owner
-            },
-            'transactions': [{
-                'transaction_date': t.transaction_date.isoformat(),
-                'transaction_type': t.transaction_type,
-                'quantity': t.quantity,
-                'notes': t.notes
-            } for t in transactions]
-        })
+        # Get stock movement data for the last 30 days
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=30)
         
+        stock_movement = db.session.query(
+            func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
+            func.sum(case(
+                [(InventoryTransaction.transaction_type == 'IN', InventoryTransaction.quantity)],
+                [(InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity)],
+                else_=0
+            )).label('net_change')
+        ).filter(
+            InventoryTransaction.transaction_date.between(start_date, end_date)
+        ).group_by('date').order_by('date').all()
+        
+        # Create complete date range
+        dates = []
+        current = start_date
+        while current <= end_date:
+            dates.append(current.date())
+            current += timedelta(days=1)
+        
+        # Fill in missing dates with zero
+        movement_dict = {movement.date.date(): float(movement.net_change or 0) 
+                        for movement in stock_movement}
+        complete_movement = [(date, movement_dict.get(date, 0)) for date in dates]
+        
+        stock_movement_data = {
+            'labels': [date.strftime('%Y-%m-%d') for date, _ in complete_movement],
+            'datasets': [{
+                'label': 'Net Stock Change',
+                'data': [float(change) for _, change in complete_movement],
+                'borderColor': '#0d6efd',
+                'backgroundColor': 'rgba(13, 110, 253, 0.1)',
+                'tension': 0.1,
+                'fill': True
+            }]
+        }
+        
+        logger.debug(f"Category Value Data: {category_value_data}")
+        logger.debug(f"Stock Movement Data: {stock_movement_data}")
+        
+        return render_template('reports.html',
+                           total_items=total_items,
+                           total_value=total_value,
+                           low_stock=low_stock,
+                           supplier_count=supplier_count,
+                           category_value_data=category_value_data,
+                           stock_movement_data=stock_movement_data,
+                           recent_transactions=recent_transactions)
+                           
     except Exception as e:
-        logger.error(f"Error fetching component details: {str(e)}")
-        return jsonify({'error': str(e)}), 500
-
+        logger.error(f"Error generating reports: {str(e)}", exc_info=True)
+        flash(f"Error generating reports: {str(e)}", "error")
+        return redirect(url_for('inventory.index'))
 
 @inventory_bp.route('/api/reports/stock-movement')
 def get_stock_movement():
@@ -330,31 +249,28 @@ def get_stock_movement():
             dates.append(current.date())
             current += timedelta(days=1)
         
-        # Query transactions for the date range
+        # Query transactions for the date range with proper type handling
         stock_movement = db.session.query(
-            db.func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
-            db.func.sum(db.case(
-                (InventoryTransaction.transaction_type == 'IN', InventoryTransaction.quantity),
-                (InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity),
+            func.date_trunc('day', InventoryTransaction.transaction_date).label('date'),
+            func.sum(case(
+                [(InventoryTransaction.transaction_type == 'IN', InventoryTransaction.quantity)],
+                [(InventoryTransaction.transaction_type == 'OUT', -InventoryTransaction.quantity)],
                 else_=0
             )).label('net_change')
         ).filter(
             InventoryTransaction.transaction_date.between(start_date, end_date)
-        ).group_by(
-            'date'
-        ).order_by('date').all()
+        ).group_by('date').order_by('date').all()
         
-        # Create a dictionary of date to net change
-        movement_dict = {movement.date.date(): movement.net_change or 0 for movement in stock_movement}
-        
-        # Fill in missing dates with zero
+        # Convert Decimal to float and handle missing dates
+        movement_dict = {movement.date.date(): float(movement.net_change or 0) 
+                        for movement in stock_movement}
         complete_movement = [(date, movement_dict.get(date, 0)) for date in dates]
         
         return jsonify({
             'labels': [date.strftime('%Y-%m-%d') for date, _ in complete_movement],
             'datasets': [{
                 'label': 'Net Stock Change',
-                'data': [int(change) for _, change in complete_movement],
+                'data': [float(change) for _, change in complete_movement],
                 'borderColor': '#0d6efd',
                 'backgroundColor': 'rgba(13, 110, 253, 0.1)',
                 'tension': 0.1,

@@ -168,9 +168,39 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Pass the data from Flask to JavaScript
-    const categoryValueData = {{ category_value_data | tojson | safe }};
-    const stockMovementData = {{ stock_movement_data | tojson | safe }};
+    // Initialize chart data with proper error handling
+    let categoryValueData = null;
+    let stockMovementData = null;
+    
+    try {
+        categoryValueData = {{ category_value_data | tojson | safe }};
+        stockMovementData = {{ stock_movement_data | tojson | safe }};
+        console.log('Category Value Data:', categoryValueData);
+        console.log('Stock Movement Data:', stockMovementData);
+    } catch (error) {
+        console.error('Error initializing chart data:', error);
+        // Set default empty data structure
+        categoryValueData = {
+            labels: [],
+            datasets: [{
+                data: [],
+                backgroundColor: [],
+                borderWidth: 1,
+                borderColor: '#343a40'
+            }]
+        };
+        stockMovementData = {
+            labels: [],
+            datasets: [{
+                label: 'Net Stock Change',
+                data: [],
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                tension: 0.1,
+                fill: true
+            }]
+        };
+    }
 </script>
 <script src="{{ url_for('static', filename='js/reports.js') }}"></script>
 {% endblock %}
