@@ -308,3 +308,46 @@ def get_stock_movement():
     except Exception as e:
         logger.error(f"Error fetching stock movement data: {str(e)}")
         return jsonify({'error': str(e)}), 500
+
+@inventory_bp.route('/api/inventory/component/<part_number>')
+def get_component_details(part_number):
+    try:
+        component = Component.query\
+            .join(Supplier)\
+            .join(Location)\
+            .filter(Component.supplier_part_number == part_number)\
+            .first()
+
+        if not component:
+            return jsonify({'error': 'Component not found'}), 404
+
+        # Get recent transactions for this component
+        transactions = InventoryTransaction.query\
+            .filter(InventoryTransaction.component_id == component.component_id)\
+            .order_by(InventoryTransaction.transaction_date.desc())\
+            .limit(5)\
+            .all()
+
+        component_data = {
+            'component': {
+                'component_id': component.component_id,
+                'supplier_part_number': component.supplier_part_number,
+                'description': component.description,
+                'supplier_name': component.supplier.supplier_name,
+                'location_code': component.location.location_code,
+                'current_quantity': component.current_quantity,
+                'owner': component.owner
+            },
+            'transactions': [{
+                'transaction_date': t.transaction_date.isoformat(),
+                'transaction_type': t.transaction_type,
+                'quantity': t.quantity,
+                'notes': t.notes
+            } for t in transactions]
+        }
+
+        return jsonify(component_data)
+
+    except Exception as e:
+        logger.error(f"Error fetching component details: {str(e)}", exc_info=True)
+        return jsonify({'error': 'Error fetching component details'}), 500
